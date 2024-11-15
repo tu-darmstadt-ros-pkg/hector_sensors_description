@@ -1,23 +1,19 @@
 cmake_minimum_required(VERSION 3.5)
 project(hector_sensors_description VERSION 0.5.1)
 
-find_package(catkin REQUIRED)
+# Find necessary packages
+find_package(ament_cmake REQUIRED)
 
-catkin_package(
-    DEPENDS
-    CATKIN_DEPENDS
-    INCLUDE_DIRS
-    LIBRARIES
+install(DIRECTORY
+  # launch
+  meshes
+  urdf
+  gazebo
+  DESTINATION share/${PROJECT_NAME}
 )
 
-#############
-## Install ##
-#############
+ament_environment_hooks(hooks/${PROJECT_NAME}.dsv.in)
+ament_environment_hooks(hooks/${PROJECT_NAME}.sh.in)
 
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-install(DIRECTORY launch meshes urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
+# Mark the package as an ament package
+ament_package()
