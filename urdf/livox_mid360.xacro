@@ -14,7 +14,7 @@
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
 				<geometry>
-					<mesh filename="package://hector_models/meshes/livox_mid360/livox_mid360.dae">
+					<mesh filename="package://hector_sensors_description/meshes/livox_mid360/livox_mid360.dae">
 					</mesh>
 				</geometry>
 			</visual>

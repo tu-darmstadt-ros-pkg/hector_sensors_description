@@ -15,7 +15,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://hector_models/meshes/orbbec_astra_stereo_s_u3/orbbec_astra_stereo_s_u3.dae"/>
+                    <mesh filename="package://hector_sensors_description/meshes/orbbec_astra_stereo_s_u3/orbbec_astra_stereo_s_u3.dae"/>
                 </geometry>
             </visual>
             <collision>

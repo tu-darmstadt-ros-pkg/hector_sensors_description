@@ -15,7 +15,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://hector_models/meshes/seek_thermal_xr/seek_thermal_xr.dae"/>
+                    <mesh filename="package://hector_sensors_description/meshes/seek_thermal_xr/seek_thermal_xr.dae"/>
                 </geometry>
             </visual>
             <collision>
