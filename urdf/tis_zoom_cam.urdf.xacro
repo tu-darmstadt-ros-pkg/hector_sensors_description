@@ -43,13 +43,13 @@
     
   </xacro:macro>
   
-  <xacro:macro name="tis_zoom_camera" params="name parent *origin">
+  <xacro:macro name="tis_zoom_camera" params="name robot_name parent *origin">
     
     <xacro:tis_zoom_camera_model name="${name}" parent="${parent}">
       <xacro:insert_block name="origin" />
     </xacro:tis_zoom_camera_model>
       
-    <xacro:generic_camera name="${name}" parent="${name}_housing_frame" ros_topic="image_raw" cam_info_topic="camera_info" update_rate="5" res_x="1920" res_y="1080" image_format="R8G8B8" hfov="70">
+    <xacro:generic_camera name="${name}" robot_name="${robot_name}" parent="${name}_housing_frame" ros_topic="image_raw" cam_info_topic="camera_info" update_rate="5" res_x="1920" res_y="1080" image_format="R8G8B8" hfov="70">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:generic_camera>
   </xacro:macro>

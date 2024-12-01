@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="os0_128_gazebo" params="name robot_name update_rate horizontal_samples vertical_samples min_range max_range">
+        <gazebo reference="${name}_frame">
+            <sensor name="${name}-OS0-128" type="gpu_lidar">
+                <visualize>false</visualize>
+                <always_on>true</always_on>
+                <update_rate>${update_rate}</update_rate>
+                <topic>${robot_name}/${name}/scan</topic>
+                <!--gz_frame_id>${name}_frame</gz_frame_id-->
+                <lidar>
+                    <scan>
+                        <horizontal>
+                        <samples>${horizontal_samples}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-${pi}</min_angle>
+                        <max_angle>${pi}</max_angle>
+                        </horizontal>
+                        <vertical>
+                        <samples>${vertical_samples}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-${45.0*pi/180.0}</min_angle>
+                        <max_angle>${45.0*pi/180.0}</max_angle>
+                        </vertical>
+                    </scan>
+                    <range>
+                        <min>${min_range}</min>
+                        <max>${max_range}</max>
+                        <resolution>0.003</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.008</stddev>
+                    </noise>
+                </lidar>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>

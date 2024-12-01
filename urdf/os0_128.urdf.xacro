@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
+  <xacro:include filename="$(find hector_sensors_description)/gazebo/os0_128.gazebo.xacro"/>
+
+  <xacro:macro name="os0_128_model" params="name parent *origin">
+    <joint name="${name}_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${name}_frame"/>
+    </joint>
+
+    <link name="${name}_frame">
+      <xacro:inertial_sphere mass="0.992" diameter="0.08082"/>
+
+      <visual>
+        <origin xyz="0 0 -0.062825" rpy="0 0 0" /> 
+        <geometry>
+          <mesh filename="package://hector_sensors_description/meshes/ouster_os0/os0_baseplate.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+
+      <visual>
+        <origin xyz="0 0 -0.040825" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hector_sensors_description/meshes/ouster_os0/os0.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 -0.000825" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="0.04041" length="0.0735"/>
+        </geometry>
+      </collision>
+
+      <collision>
+        <origin xyz="0 0 -0.047825" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.11 0.11 0.0205"/>
+        </geometry>
+      </collision>
+
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="os0_128" params="name robot_name parent *origin ros_topic">
+    <xacro:os0_128_advanced_parameters name="${name}" robot_name="${robot_name}" parent="${parent}" update_rate="10" horizontal_samples="512" vertical_samples="128" min_range="0.45" max_range="100">
+      <xacro:insert_block name="origin"/>
+    </xacro:os0_128_advanced_parameters>
+  </xacro:macro>
+
+  <xacro:macro name="os0_128_advanced_parameters" params="name robot_name parent *origin update_rate horizontal_samples vertical_samples min_range max_range">
+
+    <xacro:os0_128_model name="${name}" parent="${parent}">
+      <xacro:insert_block name="origin"/>
+    </xacro:os0_128_model>
+
+    <xacro:os0_128_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" horizontal_samples="${horizontal_samples}" vertical_samples="${vertical_samples}" min_range="${min_range}" max_range="${max_range}"/>
+
+  </xacro:macro>
+</robot>

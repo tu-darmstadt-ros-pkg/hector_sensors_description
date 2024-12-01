@@ -2,9 +2,10 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_camera.gazebo.xacro"/>
   <xacro:property name="M_PI" value="3.1415926535897931" />
 
-  <xacro:macro name="generic_camera" params="name parent *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
+  <xacro:macro name="generic_camera" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
     <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
@@ -41,31 +42,8 @@
     </joint>
   
     <link name="${name}_optical_frame"/>
-    
-    <gazebo reference="${name}_link">
-      <sensor type="camera" name="${name}_camera_sensor">
-        <update_rate>${update_rate}</update_rate>
-        <camera>
-          <horizontal_fov>${hfov * M_PI/180.0}</horizontal_fov>
-          <image>
-            <format>${image_format}</format>
-            <width>${res_x}</width>
-            <height>${res_y}</height>
-          </image>
-          <clip>
-            <near>0.01</near>
-            <far>100</far>
-          </clip>
-        </camera>
 
-        <plugin name="${name}_camera_controller" filename="libgazebo_ros_camera.so">
-          <cameraName>${name}</cameraName>
-          <imageTopicName>${ros_topic}</imageTopicName>
-          <cameraInfoTopicName>${cam_info_topic}</cameraInfoTopicName>
-          <frameName>${name}_optical_frame</frameName>
-        </plugin>
-      </sensor>
-    </gazebo>
+    <xacro:generic_camera_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" res_x="${res_x}" res_y="${res_y}" hfov="${hfov}" image_format="${image_format}"/>
   </xacro:macro>
 
 </robot>

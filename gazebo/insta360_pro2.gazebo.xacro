@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:property name="M_PI" value="3.14159"/>
+
+    <xacro:macro name="insta360_pro2_gazebo" params="camera_name robot_name ros_topic update_rate fov image_format res_x res_y">
+        <gazebo reference="${camera_name}_link">
+            <sensor type="wideanglecamera" name="${camera_name}_camera_sensor">
+                <update_rate>${update_rate}</update_rate>
+                <topic>${robot_name}/${camera_name}/${ros_topic}</topic>
+                <gz_frame_id>${camera_name}_optical_frame</gz_frame_id>
+                <camera name="${name}">
+                <!--<horizontal_fov>${hfov * pi/180.0}</horizontal_fov>-->
+                    <camera_info_topic>${robot_name}/${camera_name}/camera_info</camera_info_topic>
+                    <horizontal_fov>${fov}</horizontal_fov>
+                    <image>
+                        <format>${image_format}</format>
+                        <width>${res_x}</width>
+                        <height>${res_y}</height>
+                    </image>
+                    <clip>
+                        <near>0.01</near>
+                        <far>100</far>
+                    </clip>
+                    <lens>
+                        <type>stereographic</type>
+                        <scale_to_hfov>true</scale_to_hfov>
+                        <cutoff_angle>1.5707</cutoff_angle>
+                        <env_texture_size>512</env_texture_size>
+                    </lens>
+                </camera>
+                <!--frameName>${camera_name}_optical_frame</frameName-->
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>
