@@ -7,11 +7,11 @@
             <sensor type="rgbd_camera" name="${name}">
             <!-- Camera-specific parameters -->
             <update_rate>${update_rate}</update_rate>
-            <topic>${robot_name}/${name}</topic>
-            <gz_frame_id>${name}_${frame_name}_optical_frame</gz_frame_id>
+            <topic>$(arg robot_name)/${name}</topic>
+            <gz_frame_id>$(arg robot_name)/${name}_${frame_name}_optical_frame</gz_frame_id>
             <!-- frameName>${name}_${frame_name}_optical_frame</frameName-->
             <camera name="${name}_color">
-                <camera_info_topic>${robot_name}/${name}/camera_info</camera_info_topic>
+                <camera_info_topic>$(arg robot_name)/${name}/camera_info</camera_info_topic>
                 <horizontal_fov>${69.4 * M_PI/180.0}</horizontal_fov>
                 <image>
                     <format>B8G8R8</format>

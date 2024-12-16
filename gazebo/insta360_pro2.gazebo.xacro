@@ -7,11 +7,11 @@
         <gazebo reference="${camera_name}_link">
             <sensor type="wideanglecamera" name="${camera_name}_camera_sensor">
                 <update_rate>${update_rate}</update_rate>
-                <topic>${robot_name}/${camera_name}/${ros_topic}</topic>
-                <gz_frame_id>${camera_name}_optical_frame</gz_frame_id>
+                <topic>$(arg robot_name)/${camera_name}/${ros_topic}</topic>
+                <gz_frame_id>$(arg robot_name)/${camera_name}_optical_frame</gz_frame_id>
                 <camera name="${name}">
                 <!--<horizontal_fov>${hfov * pi/180.0}</horizontal_fov>-->
-                    <camera_info_topic>${robot_name}/${camera_name}/camera_info</camera_info_topic>
+                    <camera_info_topic>$(arg robot_name)/${camera_name}/camera_info</camera_info_topic>
                     <horizontal_fov>${fov}</horizontal_fov>
                     <image>
                         <format>${image_format}</format>

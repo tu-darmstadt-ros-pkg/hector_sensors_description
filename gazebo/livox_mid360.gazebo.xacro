@@ -9,7 +9,7 @@
 				<pose relative_to='livox_mid360_${name}_link'>0 0 0 0 0 0</pose>
 				<topic>/$(arg robot_name)/livox_mid360_${name}</topic>
 				<update_rate>10</update_rate>
-				<gz_frame_id>livox_mid360_${name}_link</gz_frame_id>
+				<gz_frame_id>$(arg robot_name)/livox_mid360_${name}_link</gz_frame_id>
 				<ray>
 					<scan>
 						<horizontal>
