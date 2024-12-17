@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- datasheet: https://www.thermal.com/uploads/1/0/1/3/101388544/compactxr-sellsheet-usa_web.pdf -->
+
+    <xacro:property name="seek_thermal_xr_mass" value="0.014"/>
+    <xacro:property name="seek_thermal_xr_length" value="0.027"/>
+    <xacro:property name="seek_thermal_xr_width" value="0.04"/>
+    <xacro:property name="seek_thermal_xr_height" value="0.055"/>
+
+    <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+
     <xacro:property name="M_PI" value="3.14159"/>
 
     <xacro:macro name="seek_thermal_xr" params="name:=default *origin *parent">
@@ -12,6 +22,7 @@
 
         <!-- Camera base -->
         <link name="seek_thermal_xr_${name}_base_link">
+            <xacro:inertial_cuboid mass="${seek_thermal_xr_mass}" x_length="${seek_thermal_xr_length}" y_length="${seek_thermal_xr_width}" z_length="${seek_thermal_xr_height}" />
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
@@ -21,7 +32,7 @@
             <collision>
                 <origin xyz="0.013 0 -0.011" rpy="0 0 0" />
                 <geometry>
-                    <box size="0.027 0.04 0.055"/>
+                    <box size="${seek_thermal_xr_length} ${seek_thermal_xr_width} ${seek_thermal_xr_height}" />
                 </geometry>
             </collision>
         </link>
