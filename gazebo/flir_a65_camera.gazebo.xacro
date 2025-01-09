@@ -6,10 +6,10 @@
             <sensor type="thermal" name="${name}_thermal_cam">
                 <update_rate>9</update_rate>
                 <always_on>true</always_on>
-                <topic>$(arg robot_name)/thermal_camera/image_raw</topic>
-                <gz_frame_id>$(arg robot_name)${name}_optical_frame</gz_frame_id>
+                <topic>${robot_name}/thermal_camera/image_raw</topic>
+                <gz_frame_id>${name}_optical_frame</gz_frame_id>
                 <camera name="${name}">
-                    <camera_info_topic>$(arg robot_name)/${name}/camera_info</camera_info_topic>
+                    <camera_info_topic>${robot_name}/${name}/camera_info</camera_info_topic>
                     <horizontal_fov>${45.0*pi/180.0}</horizontal_fov>
                     <image>
                         <format>R8G8B8</format>
