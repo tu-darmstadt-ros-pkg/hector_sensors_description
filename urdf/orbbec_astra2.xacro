@@ -4,6 +4,8 @@
 
     <!-- datasheet: https://d1cd332k3pgc17.cloudfront.net/wp-content/uploads/2023/04/ORBBEC_Datasheet_Astra-2.pdf -->
 
+    <xacro:property name="M_PI" value="3.14159"/>
+
     <xacro:property name="orbbec_astra2_mass" value="0.195"/>
     <xacro:property name="orbbec_astra2_length" value="0.037"/>
     <xacro:property name="orbbec_astra2_width" value="0.147"/>
@@ -11,17 +13,15 @@
 
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
 
-    <xacro:property name="M_PI" value="3.14159"/> 
-
-    <xacro:macro name="orbbec_astra2" params="name:=default *origin *parent">
-		<joint name="astra2_${name}_base_joint" type="fixed">
-			<child link="astra2_${name}_base_link"/>
-			<xacro:insert_block name="origin"/>
-			<xacro:insert_block name="parent"/>
-		</joint>
+    <xacro:macro name="${name}" params="name:=default *origin *parent">
+        <joint name="${name}_joint" type="fixed">
+            <child link="${name}_link"/>
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="parent"/>
+        </joint>
 
         <!-- Camera base -->
-        <link name="astra2_${name}_base_link">
+        <link name="${name}_link">
             <xacro:inertial_cuboid mass="${orbbec_astra2_mass}" x_length="${orbbec_astra2_length}" y_length="${orbbec_astra2_width}" z_length="${orbbec_astra2_height}" />
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 ${M_PI}" />
@@ -37,12 +37,12 @@
             </collision>
         </link>
 
-        <!-- Camera RGB sensor - Frame for gazebo (in x direction) -->
-        <link name="astra2_${name}_link"/>
-        <joint name="astra2_${name}_sensor_joint" type="fixed">
+        <!-- Camera RGB sensor -->
+        <link name="${name}_rgb_link"/>
+        <joint name="${name}_rgb_joint" type="fixed">
             <origin xyz="0.033 0.022 0" rpy="0 0 0" />
-            <parent link="astra2_${name}_base_link" />
-            <child link="astra2_${name}_link" />
+            <parent link="${name}_link" />
+            <child link="${name}_rgb_link" />
         </joint>
 
         <!-- Optical Frame for ros (in z direction) -->
