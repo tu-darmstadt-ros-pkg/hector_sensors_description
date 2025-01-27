@@ -13,7 +13,7 @@
 
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
 
-    <xacro:macro name="${name}" params="name:=default *origin *parent">
+    <xacro:macro name="seek_thermal_xr" params="name *origin *parent">
         <joint name="${name}_joint" type="fixed">
             <child link="${name}_link"/>
             <xacro:insert_block name="origin"/>
@@ -37,12 +37,21 @@
             </collision>
         </link>
 
+        <link name="${name}_thermal_link"/>
+        <joint name="${name}_thermal_joint" type="fixed">
+            <origin xyz="0.025 0 0" rpy="0 0 0" />
+            <parent link="${name}_link" />
+            <child link="${name}_thermal_link" />
+        </joint>
+
         <!-- Camera optical frame -->
         <link name="${name}_optical_frame"/>
         <joint name="${name}_optical_joint" type="fixed">
-            <origin xyz="0.025 0 0" rpy="-${M_PI/2} 0 -${M_PI/2}" />
-            <parent link="${name}_link" />
+            <origin xyz="0 0 0" rpy="-${M_PI/2} 0 -${M_PI/2}" />
+            <parent link="${name}_thermal_link" />
             <child link="${name}_optical_frame" />
         </joint>
     </xacro:macro>
+
+    
 </robot>
