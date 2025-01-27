@@ -20,7 +20,7 @@
 			<xacro:insert_block name="parent"/>
 		</joint>
 
-		<link name="${name}_link">
+		<link name="${name}_lidar_link">
 			<xacro:inertial_cuboid mass="${livox_mid360_mass}" x_length="${livox_mid360_length}" y_length="${livox_mid360_width}" z_length="${livox_mid360_height}"/>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0"/>
