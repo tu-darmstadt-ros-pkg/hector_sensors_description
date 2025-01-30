@@ -44,4 +44,5 @@
 
     <xacro:flir_a65_camera_gazebo name="${name}"/>
   </xacro:macro>
+
 </robot>
