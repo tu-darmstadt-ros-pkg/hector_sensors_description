@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="flir_boson_640_gazebo_plugin_macro" params="name parent *origin">
+    <gazebo reference="${name}_frame">
+      <sensor type="thermal" name="thermal_camera_sensor">
+        <update_rate>9</update_rate>
+        <always_on>true</always_on>
+        <topic>$(arg robot_name)/thermal_camera/image_raw</topic>
+        <gz_frame_id>${name}_optical_frame</gz_frame_id>
+        <camera>
+          <camera_info_topic>$(arg robot_name)/${name}/camera_info</camera_info_topic>
+          <horizontal_fov>${50.0*pi/180.0}</horizontal_fov>
+          <image>
+              <format>R8G8B8</format>
+              <width>640</width>
+              <height>512</height>
+          </image>
+          <clip>
+              <near>0.01</near>
+              <far>10</far>
+          </clip>
+        </camera>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

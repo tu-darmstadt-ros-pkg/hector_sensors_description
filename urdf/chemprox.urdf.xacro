@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="chemprox_geometry">
+    <geometry>
+	    <box size="0.17 0.103 0.065"/> <!-- shrunk y size to 0.103 from 0.105 due tol collision with arm link-->
+    </geometry>
+  </xacro:property>
+  <xacro:property name="chemprox_adapter_geometry">
+  <origin xyz="0.0 0.0 0.05" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.09 0.07 0.03"/>
+    </geometry>
+  </xacro:property>
+
+  <xacro:macro name="chemprox" params="name parent *origin">
+
+    <joint name="${name}_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+
+    <link name="${name}_link">
+      <visual>
+        <xacro:insert_block name="chemprox_geometry"/>
+        <material name="DarkGrey">
+          <color rgba="0.3 0.3 0.3 1"/>
+        </material>
+      </visual>
+      <visual>
+        <xacro:insert_block name="chemprox_adapter_geometry"/>
+        <material name="DarkGrey">
+          <color rgba="0.3 0.3 0.3 1"/>
+        </material>
+      </visual>
+
+      <collision>
+        <xacro:insert_block name="chemprox_geometry"/>
+      </collision>
+
+      <collision>
+        <xacro:insert_block name="chemprox_adapter_geometry"/>
+      </collision>
+    </link>
+
+  </xacro:macro>
+</robot>
