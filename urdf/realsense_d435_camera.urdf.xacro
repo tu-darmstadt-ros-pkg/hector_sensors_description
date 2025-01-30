@@ -92,67 +92,67 @@ Note:
       </link>
     </xacro:macro>
     
-    <xacro:macro name="realsense_d435_camera_gazebo_plugin_macro" params="name robot_name parent frame_name:=color min_range max_range update_rate">
-      <xacro:realsense_d435_camera_gazebo name="${name}" robot_name="${robot_name}" parent="${parent}" frame_name="color" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
+    <xacro:macro name="realsense_d435_camera_gazebo_plugin_macro" params="name parent frame_name:=color min_range max_range update_rate">
+      <xacro:realsense_d435_camera_gazebo name="${name}" parent="${parent}" frame_name="color" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
     </xacro:macro>
       
     <!--
       Use the macro below for adding the realsense model with link geometry
       The origin is the left infrared (depth) camera, which is also the origin of the depth image
     -->
-    <xacro:macro name="realsense_d435_camera" params="name robot_name parent *origin">
+    <xacro:macro name="realsense_d435_camera" params="name  parent *origin">
       <xacro:realsense_d435_camera_model name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model>
   
-      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
+      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
     </xacro:macro>
     
     <!--
       Insert the realsense with link geometry. Origin is the mounting hole at the back of the camera.
     -->
-    <xacro:macro name="realsense_d435_camera_with_mount" params="name robot_name parent *origin">
+    <xacro:macro name="realsense_d435_camera_with_mount" params="name parent *origin">
       <xacro:realsense_d435_camera_model_with_mount name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model_with_mount>
       
-      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
+      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
     </xacro:macro>
     
     <!--
       Use the macro below for adding the realsense model without link geometry,
       e.g. if the sensor is added into preexisting geometry
     -->
-    <xacro:macro name="realsense_camera_no_geom" params="name robot_name parent *origin">
+    <xacro:macro name="realsense_camera_no_geom" params="name parent *origin">
       <xacro:realsense_d435_camera_model_no_geom name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model_no_geom>
   
-      <xacro:realsense_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
+      <xacro:realsense_camera_gazebo_plugin_macro name="${name}" parent="${parent}" min_range="0.3" max_range="9.0" update_rate="20"/>
     </xacro:macro>
     
-    <xacro:macro name="realsense_d435_camera_no_geom_comprehensive_params" params="name robot_name parent *origin frame_name:=color min_range max_range update_rate">
+    <xacro:macro name="realsense_d435_camera_no_geom_comprehensive_params" params="name parent *origin frame_name:=color min_range max_range update_rate">
       <xacro:realsense_d435_camera_model_no_geom name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model_no_geom>
   
-      <xacro:realsense_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" image_topic="${image_topic}" depth_topic="${depth_topic}" depth_points_topic="${depth_points_topic}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
+      <xacro:realsense_camera_gazebo_plugin_macro name="${name}" parent="${parent}" image_topic="${image_topic}" depth_topic="${depth_topic}" depth_points_topic="${depth_points_topic}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
     </xacro:macro>
     
-    <xacro:macro name="realsense_d435_camera_comprehensive_params" params="name robot_name parent *origin frame_name:=color min_range:=0.3 max_range:=9.0 update_rate:=20">
+    <xacro:macro name="realsense_d435_camera_comprehensive_params" params="name parent *origin frame_name:=color min_range:=0.3 max_range:=9.0 update_rate:=20">
       <xacro:realsense_d435_camera_model name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model>
   
-      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
+      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" parent="${parent}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
     </xacro:macro>
     
-    <xacro:macro name="realsense_d435_camera_with_mount_comprehensive_params" params="name robot_name parent *origin frame_name:=color min_range:=0.3 max_range:=9.0 update_rate:=20">
+    <xacro:macro name="realsense_d435_camera_with_mount_comprehensive_params" params="name parent *origin frame_name:=color min_range:=0.3 max_range:=9.0 update_rate:=20">
       <xacro:realsense_d435_camera_model_with_mount name="${name}" parent="${parent}">
         <xacro:insert_block name="origin" />
       </xacro:realsense_d435_camera_model_with_mount>
   
-      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" robot_name="${robot_name}" parent="${parent}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
+      <xacro:realsense_d435_camera_gazebo_plugin_macro name="${name}" parent="${parent}" frame_name="${frame_name}" min_range="${min_range}" max_range="${max_range}" update_rate="${update_rate}"/>
     </xacro:macro>
      
   </robot>

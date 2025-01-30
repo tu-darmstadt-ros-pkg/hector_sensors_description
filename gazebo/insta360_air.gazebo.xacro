@@ -2,6 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:property name="M_PI" value="3.14159"/>
+    <xacro:arg name="robot_name" default=""/>
 
     <xacro:macro name="insta360_air_gazebo" params="name:=default">
         <gazebo reference="insta360_air_${name}_left_optical_frame">
@@ -9,11 +10,11 @@
                 <always_on>true</always_on>
                 <visualize>true</visualize>
                 <update_rate>15</update_rate>
-                <topic>/$(arg robot_name)/insta360_air_${name}_left/rgb/image_raw</topic>
+                <topic>$(arg robot_name)/insta360_air_${name}_left/rgb/image_raw</topic>
                 <gz_frame_id>insta360_air_${name}_left_optical_frame</gz_frame_id>
 
                 <camera>
-                    <camera_info_topic>/$(arg robot_name)/insta360_air_${name}_left/rgb/camera_info</camera_info_topic>
+                    <camera_info_topic>$(arg robot_name)/insta360_air_${name}_left/rgb/camera_info</camera_info_topic>
                     <horizontal_fov>${M_PI}</horizontal_fov>
                     <image>
                         <format>R8G8B8</format>
@@ -39,11 +40,11 @@
                 <always_on>true</always_on>
                 <visualize>true</visualize>
                 <update_rate>15</update_rate>
-                <topic>/$(arg robot_name)/insta360_air_${name}_right/rgb/image_raw</topic>
+                <topic>$(arg robot_name)/insta360_air_${name}_right/rgb/image_raw</topic>
                 <gz_frame_id>insta360_air_${name}_right_optical_frame</gz_frame_id>
 
                 <camera>
-                    <camera_info_topic>/$(arg robot_name)/insta360_air_${name}_right/rgb/camera_info</camera_info_topic>
+                    <camera_info_topic>$(arg robot_name)/insta360_air_${name}_right/rgb/camera_info</camera_info_topic>
                     <optical_frame_id>insta360_air_${name}_right_optical_frame</optical_frame_id>
                     <horizontal_fov>${M_PI}</horizontal_fov>
                     <image>

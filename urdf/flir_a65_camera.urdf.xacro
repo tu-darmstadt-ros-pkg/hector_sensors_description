@@ -36,13 +36,12 @@
     
   </xacro:macro>
   
-  <xacro:macro name="flir_a65_camera" params="name parent robot_name *origin">
+  <xacro:macro name="flir_a65_camera" params="name parent *origin">
     
     <xacro:flir_a65_camera_model name="${name}" parent="${parent}">
       <xacro:insert_block name="origin" />
     </xacro:flir_a65_camera_model>
 
-    <xacro:flir_a65_camera_gazebo robot_name="${robot_name}"/>
+    <xacro:flir_a65_camera_gazebo name="${name}"/>
   </xacro:macro>
 </robot>
-

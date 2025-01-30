@@ -46,19 +46,19 @@
     </link>
   </xacro:macro>
 
-  <xacro:macro name="os0_128" params="name robot_name parent *origin ros_topic">
-    <xacro:os0_128_advanced_parameters name="${name}" robot_name="${robot_name}" parent="${parent}" update_rate="10" horizontal_samples="512" vertical_samples="128" min_range="0.45" max_range="100">
+  <xacro:macro name="os0_128" params="name parent *origin ros_topic">
+    <xacro:os0_128_advanced_parameters name="${name}" parent="${parent}" update_rate="10" horizontal_samples="512" vertical_samples="128" min_range="0.45" max_range="100">
       <xacro:insert_block name="origin"/>
     </xacro:os0_128_advanced_parameters>
   </xacro:macro>
 
-  <xacro:macro name="os0_128_advanced_parameters" params="name robot_name parent *origin update_rate horizontal_samples vertical_samples min_range max_range">
+  <xacro:macro name="os0_128_advanced_parameters" params="name parent *origin update_rate horizontal_samples vertical_samples min_range max_range">
 
     <xacro:os0_128_model name="${name}" parent="${parent}">
       <xacro:insert_block name="origin"/>
     </xacro:os0_128_model>
 
-    <xacro:os0_128_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" horizontal_samples="${horizontal_samples}" vertical_samples="${vertical_samples}" min_range="${min_range}" max_range="${max_range}"/>
+    <xacro:os0_128_gazebo name="${name}" update_rate="${update_rate}" horizontal_samples="${horizontal_samples}" vertical_samples="${vertical_samples}" min_range="${min_range}" max_range="${max_range}"/>
 
   </xacro:macro>
 </robot>

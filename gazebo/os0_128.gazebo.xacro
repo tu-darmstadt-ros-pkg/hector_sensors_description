@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:macro name="os0_128_gazebo" params="name robot_name update_rate horizontal_samples vertical_samples min_range max_range">
+    <xacro:arg name="robot_name" default=""/>
+
+    <xacro:macro name="os0_128_gazebo" params="name update_rate horizontal_samples vertical_samples min_range max_range">
         <gazebo reference="${name}_frame">
             <sensor name="${name}-OS0-128" type="gpu_lidar">
                 <visualize>false</visualize>
                 <always_on>true</always_on>
                 <update_rate>${update_rate}</update_rate>
-                <topic>${robot_name}/${name}/scan</topic>
+                <topic>$(arg robot_name)/${name}/scan</topic>
                 <!--gz_frame_id>${name}_frame</gz_frame_id-->
                 <lidar>
                     <scan>
