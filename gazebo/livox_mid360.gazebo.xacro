@@ -4,9 +4,9 @@
 	<xacro:property name="M_PI" value="3.14159"/>
 
 	<xacro:macro name="livox_mid360_gazebo" params="visualize:=True name:=default">
-		<gazebo reference="livox_mid360_${name}_laser_frame">
+		<gazebo reference="${name}_laser_frame">
 			<sensor name='gpu_lidar_${name}' type='gpu_lidar'>"
-				<pose relative_to='livox_mid360_${name}_laser_frame'>0 0 0 0 0 0</pose>
+				<pose relative_to='${name}_laser_frame'>0 0 0 0 0 0</pose>
 				<topic>/$(arg robot_name)/livox_mid360_${name}</topic>
 				<update_rate>10</update_rate>
 				<gz_frame_id>livox_mid360_${name}_laser_frame</gz_frame_id>

@@ -4,17 +4,17 @@
 	<xacro:property name="M_PI" value="3.14159"/>
 
 	<xacro:macro name="orbbec_astra2_gazebo" params="name:=default semantic_segmentation:=false">
-		<gazebo reference="astra2_${name}_link">
-			<sensor type="camera" name="astra2_${name}">
+		<gazebo reference="${name}_link">
+			<sensor type="camera" name="${name}_rgb">
 				<always_on>true</always_on>
 				<visualize>true</visualize>
 				<update_rate>15</update_rate>
-				<topic>/$(arg robot_name)/astra2_${name}/rgb/image_raw</topic>
-				<gz_frame_id>astra2_${name}_link</gz_frame_id>
+				<topic>/$(arg robot_name)/${name}/rgb/image_raw</topic>
+				<gz_frame_id>${name}_rgb_link</gz_frame_id>
 
-				<camera name="astra2_${name}_camera">
-					<camera_info_topic>/$(arg robot_name)/astra2_${name}/rgb/camera_info</camera_info_topic>
-					<optical_frame_id>astra2_${name}_optical_frame</optical_frame_id>
+				<camera name="${name}_camera">
+					<camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
+					<optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
 					<horizontal_fov>${90.0 * M_PI/180.0}</horizontal_fov>
 					<image>
 						<format>R8G8B8</format>
@@ -28,16 +28,16 @@
 				</camera>
 			</sensor>
 
-			<sensor type="depth_camera" name="astra2_${name}_depth">
+			<sensor type="depth_camera" name="${name}_depth">
 				<always_on>true</always_on>
 				<visualize>true</visualize>
 				<update_rate>15</update_rate>
-				<topic>/$(arg robot_name)/astra2_${name}/depth/image_raw</topic>
-				<gz_frame_id>astra2_${name}_link</gz_frame_id>
+				<topic>/$(arg robot_name)/${name}/depth/image_raw</topic>
+				<gz_frame_id>${name}_depth_link</gz_frame_id>
 
 				<camera>
-					<camera_info_topic>/$(arg robot_name)/astra2_${name}/depth/camera_info</camera_info_topic>
-					<optical_frame_id>astra2_${name}_optical_frame</optical_frame_id>
+					<camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
+					<optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
 					<horizontal_fov>1.047</horizontal_fov>
 					<image>
 						<format>R_FLOAT32</format>
@@ -60,10 +60,10 @@
 
 			<xacro:if value="$(arg semantic_segmentation)">
 				<sensor name="astra2_${name}_segmentation_camera" type="segmentation">
-					<topic>/$(arg robot_name)/astra2_${name}/segmentation</topic>
-					<gz_frame_id>astra2_${name}_link</gz_frame_id>
+					<topic>/$(arg robot_name)/${name}/segmentation</topic>
+					<gz_frame_id>${name}_link</gz_frame_id>
 					<camera>
-						<optical_frame_id>astra2_${name}_optical_frame</optical_frame_id>
+						<optical_frame_id>${name}_optical_frame</optical_frame_id>
 						<segmentation_type>instance</segmentation_type>
 						<horizontal_fov>${90.0 * M_PI/180.0}</horizontal_fov>
 						<image>
