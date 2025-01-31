@@ -2,7 +2,8 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:property name="M_PI" value="3.14159"/>
-	
+	<xacro:arg name="semantic_segmentation" default="false"/>
+
 	<xacro:macro name="orbbec_astra_stereo_s_u3_gazebo" params="name:=default">
 		<gazebo reference="${name}_link">
 			<sensor type="camera" name="${name}_rgb">
