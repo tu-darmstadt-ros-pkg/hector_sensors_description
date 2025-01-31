@@ -8,8 +8,10 @@
 
 
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+	<xacro:include filename="$(find hector_sensors_description)/gazebo/astra_stereo_s_u3.gazebo.xacro" />
 
     <xacro:macro name="orbbec_astra_stereo_s_u3" params="name *origin *parent">
+        <xacro:orbbec_astra_stereo_s_u3_gazebo name="${name}" />
 
         <xacro:property name="orbbec_astra_stereo_s_u3_mass" value="0.05"/> <!-- estimated, needs to be checked -->
         <xacro:property name="orbbec_astra_stereo_s_u3_length" value="0.0653"/>

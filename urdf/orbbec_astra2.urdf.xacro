@@ -7,11 +7,12 @@
     <xacro:property name="M_PI" value="3.14159"/>
 
 
-
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+    <xacro:include filename="$(find hector_sensors_description)/gazebo/orbbec_astra2.gazebo.xacro" />
 
     <xacro:macro name="orbbec_astra2" params="name *origin *parent">
-    
+        <xacro:orbbec_astra2_gazebo name="${name}" />
+
         <xacro:property name="orbbec_astra2_mass" value="0.195"/>
         <xacro:property name="orbbec_astra2_length" value="0.037"/>
         <xacro:property name="orbbec_astra2_width" value="0.147"/>
