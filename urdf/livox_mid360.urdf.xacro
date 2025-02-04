@@ -12,8 +12,11 @@
 	<xacro:property name="livox_mid360_height" value="0.061"/>
 
 	<xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+	<xacro:include filename="$(find hector_sensors_description)/gazebo/livox_mid360.gazebo.xacro" />
 
 	<xacro:macro name="livox_mid360" params="name *origin *parent">
+	  	<xacro:livox_mid360_gazebo name="${name}" />
+
 		<joint name="${name}_joint" type="fixed">
 			<child link="${name}_link"/>
 			<xacro:insert_block name="origin"/>
