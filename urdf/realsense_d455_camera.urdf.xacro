@@ -189,6 +189,12 @@ Note:
       </joint>
     </xacro:if>
 
+    <xacro:realsense_d455_camera_gazebo_plugin_macro name="${name}" parent="${parent}" image_topic="${image_topic}"
+    depth_topic="${depth_topic}"
+    depth_points_topic="${depth_points_topic}"
+    frame_name="${frame_name}" min_range="${min_range}"
+    max_range="${max_range}" update_rate="${update_rate}"/>
+
   </xacro:macro>
 
   
@@ -203,7 +209,8 @@ Note:
     <link name="${name}_mount_link">
     </link>
 
-    <xacro:sensor_d455 name="${name}" parent="${name}_mount_link">
+    <xacro:sensor_d455 name="${name}" parent="${name}_mount_link"
+      use_nominal_extrinsics="${use_nominal_extrinsics}">
       <origin
           xyz="${d455_mesh_x_offset} ${d455_cam_depth_py} ${d455_cam_depth_pz}"
           rpy="0 0 0"/>
@@ -211,15 +218,11 @@ Note:
   </xacro:macro>
 
   <xacro:macro name="realsense_d455_camera_with_mount_comprehensive_params"
-               params="name parent *origin image_topic depth_topic:=image_raw depth_points_topic frame_name:=color min_range max_range update_rate">
+               params="name parent *origin image_topic depth_topic:=image_raw depth_points_topic frame_name:=color min_range max_range update_rate use_nominal_extrinsics:=false">
     <xacro:realsense_d455_camera_model_with_mount name="${name}" parent="${parent}">
       <xacro:insert_block name="origin"/>
     </xacro:realsense_d455_camera_model_with_mount>
 
-    <xacro:realsense_d455_camera_gazebo_plugin_macro name="${name}" parent="${parent}" image_topic="${image_topic}"
-                                                     depth_topic="${depth_topic}"
-                                                     depth_points_topic="${depth_points_topic}"
-                                                     frame_name="${frame_name}" min_range="${min_range}"
-                                                     max_range="${max_range}" update_rate="${update_rate}"/>
+    
   </xacro:macro>
 </robot>

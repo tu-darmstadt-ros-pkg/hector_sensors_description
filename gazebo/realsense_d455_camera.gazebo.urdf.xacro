@@ -8,6 +8,7 @@
     <gazebo reference="${name}_link">
       <sensor type="rgbd_camera" name="${name}">
         <update_rate>${update_rate}</update_rate>
+        <topic>$(arg robot_name)/${name}</topic>
         <gz_frame_id>${name}_${frame_name}_optical_frame</gz_frame_id>
         <camera name="${name}_color">
           <topic>image_topic</topic>
@@ -37,5 +38,5 @@
         </point_cloud>
       </sensor>
     </gazebo>
-  </xacro:macro>
+  </xacro:macro> 
 </robot>
