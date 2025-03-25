@@ -3,6 +3,8 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:property name="M_PI" value="3.14159"/>
 
+	<xacro:arg name="robot_name" default=""/>
+
 	<xacro:macro name="livox_mid360_gazebo" params="visualize:=True name:=default">
 		<gazebo reference="${name}_laser_frame">
 			<sensor name='gpu_lidar_${name}' type='gpu_lidar'>"

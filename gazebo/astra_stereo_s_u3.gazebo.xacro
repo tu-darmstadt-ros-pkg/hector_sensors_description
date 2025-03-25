@@ -4,6 +4,8 @@
 	<xacro:property name="M_PI" value="3.14159"/>
 	<xacro:arg name="semantic_segmentation" default="false"/>
 
+	<xacro:arg name="robot_name" default=""/>
+	
 	<xacro:macro name="orbbec_astra_stereo_s_u3_gazebo" params="name:=default">
 		<gazebo reference="${name}_link">
 			<sensor type="camera" name="${name}_rgb">
@@ -61,8 +63,8 @@
 
 			<xacro:if value="$(arg semantic_segmentation)">
 				<sensor name="astra2_${name}_segmentation_camera" type="segmentation">
-					<topic>/$(arg robot_name)/${name}/segmentation</topic>
-					<gz_frame_id>${name}_link</gz_frame_id>
+					<topic>$(arg robot_name)/astra2_${name}/segmentation</topic>
+					<gz_frame_id>astra2_${name}_link</gz_frame_id>
 					<camera>
 						<optical_frame_id>${name}_optical_frame</optical_frame_id>
 						<segmentation_type>instance</segmentation_type>

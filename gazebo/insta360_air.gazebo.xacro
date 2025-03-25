@@ -2,6 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:property name="M_PI" value="3.14159"/>
+    <xacro:arg name="robot_name" default=""/>
 
     <xacro:macro name="insta360_air_gazebo" params="name:=default">
         <gazebo reference="${name}_left_optical_frame">

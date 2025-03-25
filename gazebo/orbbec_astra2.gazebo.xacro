@@ -4,6 +4,8 @@
 	<xacro:property name="M_PI" value="3.14159"/>
 	<xacro:arg name="semantic_segmentation" default="false"/>
 	
+	<xacro:arg name="robot_name" default=""/>
+
 	<xacro:macro name="orbbec_astra2_gazebo" params="name:=default semantic_segmentation:=false">
 		<gazebo reference="${name}_link">
 			<sensor type="camera" name="${name}_rgb">
