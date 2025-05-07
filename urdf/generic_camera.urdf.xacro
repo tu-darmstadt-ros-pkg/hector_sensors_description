@@ -5,7 +5,7 @@
   <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_camera.gazebo.xacro"/>
   <xacro:property name="M_PI" value="3.1415926535897931" />
 
-  <xacro:macro name="generic_camera" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
+  <xacro:macro name="generic_camera" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov wide_angle=false">
     <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin" />
       <parent link="${parent}"/>
@@ -34,15 +34,15 @@
         </geometry>
       </collision>-->
     </link>
+  
+    <link name="${name}_optical_frame"/>
     
     <joint name="${name}_optical_joint" type="fixed">
       <origin xyz="0 0 0" rpy="${-M_PI/2} 0.0 ${-M_PI/2}" />
       <parent link="${name}_link" />
       <child link="${name}_optical_frame"/>
     </joint>
-  
-    <link name="${name}_optical_frame"/>
- 
+    <xacro:generic_camera_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" res_x="${res_x}" res_y="${res_y}" hfov="${hfov}" image_format="${image_format}" wide_angle="${wide_angle}"/>
 
+  </xacro:macro>
 </robot>
-
