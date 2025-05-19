@@ -11,7 +11,7 @@
       <parent link="${parent}"/>
       <child link="${name}_frame"/>
     </joint>
-    
+
     <link name="${name}_frame">
       <xacro:inertial_sphere mass="0.21" diameter="0.07" />
       <visual>
@@ -27,17 +27,17 @@
         </geometry>
       </collision>
     </link>
-    
+
     <xacro:add_optical_frame name="${name}" />
-    
+
     <gazebo reference="${name}_frame">
       <material>Gazebo/Grey</material>
     </gazebo>
-    
+
   </xacro:macro>
-  
+
   <xacro:macro name="flir_a65_camera" params="name parent robot_name *origin">
-    
+
     <xacro:flir_a65_camera_model name="${name}" parent="${parent}">
       <xacro:insert_block name="origin" />
     </xacro:flir_a65_camera_model>

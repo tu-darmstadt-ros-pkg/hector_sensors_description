@@ -11,7 +11,7 @@
       <parent link="${parent}"/>
       <child link="${name}_link"/>
     </joint>
-    
+
     <link name="${name}_link">
 <!--      <inertial>
         <mass value="0.001" />
@@ -34,9 +34,9 @@
         </geometry>
       </collision>-->
     </link>
-  
+
     <link name="${name}_optical_frame"/>
-    
+
     <joint name="${name}_optical_joint" type="fixed">
       <origin xyz="0 0 0" rpy="${-M_PI/2} 0.0 ${-M_PI/2}" />
       <parent link="${name}_link" />
