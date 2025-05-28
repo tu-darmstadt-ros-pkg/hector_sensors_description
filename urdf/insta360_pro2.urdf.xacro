@@ -68,7 +68,7 @@
     </xacro:insta360_pro2_camera>
 
   </xacro:macro>
-  
+
   <xacro:macro name="insta360_pro2_with_calibration" params="name parent robot_name *origin *calibration1 *calibration2 *calibration3 *calibration4 *calibration5 *calibration6 ros_topic update_rate res_x res_y image_format fov">
 
     <joint name="${name}_center_joint" type="fixed">

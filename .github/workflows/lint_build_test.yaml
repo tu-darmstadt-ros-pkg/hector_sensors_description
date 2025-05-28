@@ -1,0 +1,34 @@
+name: Lint, Build & Test
+on:
+  push:
+    branches:
+      - jazzy
+  pull_request:
+    branches:
+      - jazzy
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  Linting:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        run: |
+          sudo apt-get update && sudo apt-get install -y black clang-format cppcheck libxml2-utils
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+
+      - name: Install and Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files
+
