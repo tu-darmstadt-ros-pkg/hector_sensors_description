@@ -41,7 +41,7 @@
 
 		<link name="${name}_laser_frame"/>
 		<joint name="${name}_sensor_joint_laser_frame" type="fixed">
-			<origin xyz="0 0 0.03" rpy="0 0 ${-M_PI/2.0}" />
+			<origin xyz="0 0 0.047" rpy="0 0 ${-M_PI/2.0}" />
             <parent link="${name}_link" />
             <child link="${name}_laser_frame" />
         </joint>
