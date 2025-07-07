@@ -40,9 +40,7 @@
                 </geometry>
             </collision>
         </link>
-
-    <!-- optical frames are published by driver, use launch file for simulation -->  
-
+    <!-- optical frames are published by driver, use launch file for simulation -->
     </xacro:macro>
 
 </robot>
