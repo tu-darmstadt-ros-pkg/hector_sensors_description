@@ -4,7 +4,7 @@ project(hector_sensors_description VERSION 0.5.1)
 # Find necessary packages
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY # launch
+install(DIRECTORY launch
                   meshes urdf gazebo DESTINATION share/${PROJECT_NAME})
 
 ament_environment_hooks(hooks/${PROJECT_NAME}.dsv.in)
