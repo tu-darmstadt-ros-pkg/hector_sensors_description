@@ -27,7 +27,7 @@
         <link name="${name}_link">
             <xacro:inertial_cuboid mass="${orbbec_gemini2_mass}" x_length="${orbbec_gemini2_length}" y_length="${orbbec_gemini2_width}" z_length="${orbbec_gemini2_height}" />
             <visual>
-                <origin xyz="0 0 0" rpy="${M_PI} 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <mesh filename="package://hector_sensors_description/meshes/orbbec_gemini2/orbbec_gemini2.stl"/>
                 </geometry>
@@ -44,7 +44,7 @@
         <!-- Camera RGB sensor -->
         <link name="${name}_rgb_link"/>
         <joint name="${name}_rgb_joint" type="fixed">
-            <origin xyz="0.01682 0.010995 0.012505" rpy="0 0 0" />
+            <origin xyz="0.01682 0.010995 0" rpy="0 0 0" />
             <parent link="${name}_link" />
             <child link="${name}_rgb_link" />
         </joint>
@@ -53,13 +53,13 @@
         <link name="${name}_rgb_optical_frame"/>
         <joint name="${name}_rgb_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="-${M_PI/2.0} 0 -${M_PI/2.0}" />
-            <parent link="${name}_link" />
+            <parent link="${name}_rgb_link" />
             <child link="${name}_rgb_optical_frame" />
         </joint>
 
         <link name="${name}_depth_link"/>
         <joint name="${name}_depth_joint" type="fixed">
-            <origin xyz="0.01491 0.025 0.0125" rpy="0 0 0" />
+            <origin xyz="0.01491 0.025 0" rpy="0 0 0" />
             <parent link="${name}_link" />
             <child link="${name}_depth_link" />
         </joint>
@@ -67,7 +67,7 @@
         <link name="${name}_depth_optical_frame"/>
         <joint name="${name}_depth_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="-${M_PI/2.0} 0 -${M_PI/2.0}" />
-            <parent link="${name}_link" />
+            <parent link="${name}_depth_link" />
             <child link="${name}_depth_optical_frame" />
         </joint>
 
