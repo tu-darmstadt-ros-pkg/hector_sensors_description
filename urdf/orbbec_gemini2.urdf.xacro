@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- datasheet: https://d1cd332k3pgc17.cloudfront.net/wp-content/uploads/2023/04/ORBBEC_Datasheet_Gemini-2.pdf -->
+
+    <xacro:property name="M_PI" value="3.14159"/>
+
+
+    <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
+    <xacro:include filename="$(find hector_sensors_description)/gazebo/orbbec_gemini2.gazebo.xacro" />
+
+    <xacro:macro name="orbbec_gemini2" params="name *origin *parent">
+        <xacro:orbbec_gemini2_gazebo name="${name}" />
+
+        <xacro:property name="orbbec_gemini2_mass" value="0.098"/>
+        <xacro:property name="orbbec_gemini2_length" value="0.030"/>
+        <xacro:property name="orbbec_gemini2_width" value="0.090"/>
+        <xacro:property name="orbbec_gemini2_height" value="0.025"/>
+        <joint name="${name}_joint" type="fixed">
+            <child link="${name}_link"/>
+            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="parent"/>
+        </joint>
+
+        <!-- Camera base -->
+        <link name="${name}_link">
+            <xacro:inertial_cuboid mass="${orbbec_gemini2_mass}" x_length="${orbbec_gemini2_length}" y_length="${orbbec_gemini2_width}" z_length="${orbbec_gemini2_height}" />
+            <visual>
+                <origin xyz="0 0 0" rpy="${M_PI} 0 0" />
+                <geometry>
+                    <mesh filename="package://hector_sensors_description/meshes/orbbec_gemini2/orbbec_gemini2.stl"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin xyz="0.018 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="${orbbec_gemini2_length} ${orbbec_gemini2_width} ${orbbec_gemini2_height}" />
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- Camera RGB sensor -->
+        <link name="${name}_rgb_link"/>
+        <joint name="${name}_rgb_joint" type="fixed">
+            <origin xyz="0.01682 0.010995 0.012505" rpy="0 0 0" />
+            <parent link="${name}_link" />
+            <child link="${name}_rgb_link" />
+        </joint>
+
+        <!-- Optical Frame for ros (in z direction) -->
+        <link name="${name}_rgb_optical_frame"/>
+        <joint name="${name}_rgb_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="-${M_PI/2.0} 0 -${M_PI/2.0}" />
+            <parent link="${name}_link" />
+            <child link="${name}_rgb_optical_frame" />
+        </joint>
+
+        <link name="${name}_depth_link"/>
+        <joint name="${name}_depth_joint" type="fixed">
+            <origin xyz="0.01491 0.025 0.0125" rpy="0 0 0" />
+            <parent link="${name}_link" />
+            <child link="${name}_depth_link" />
+        </joint>
+
+        <link name="${name}_depth_optical_frame"/>
+        <joint name="${name}_depth_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="-${M_PI/2.0} 0 -${M_PI/2.0}" />
+            <parent link="${name}_link" />
+            <child link="${name}_depth_optical_frame" />
+        </joint>
+
+    </xacro:macro>
+</robot>
