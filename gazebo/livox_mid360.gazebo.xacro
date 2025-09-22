@@ -3,37 +3,29 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 	<xacro:property name="M_PI" value="3.14159"/>
 
-	<xacro:macro name="livox_mid360_gazebo" params="visualize:=True name:=default use_rgl:=False">
+	<xacro:macro name="livox_mid360_gazebo" params="visualize:=True name:=default use_rgl:=True">
 		<gazebo reference="${name}_laser_frame">
-
-			<!-- ===== RGL-Variante (Livox Mid360 Preset) ===== -->
+			<!-- ===== RGL-Variant (Livox Mid360 Preset) ===== -->
 			<xacro:if value="${use_rgl}">
-				<sensor name="rgl_lidar_${name}" type="custom">
+				<sensor name="${name}" type="custom">
 					<pose relative_to='${name}_laser_frame'>0 0 0 0 0 0</pose>
-					<always_on>true</always_on>
 					<update_rate>10</update_rate>
-					<visualize>${visualize}</visualize>
-
 					<plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
 						<range>
-							<min>0.1</min>
-							<max>100.0</max>
+							<min>0</min>
+							<max>245</max>
 						</range>
 						<update_rate>10</update_rate>
-
-						<!-- Gazebo-Transport Topic (wird via ros_gz_bridge auf PointCloud2 gemappt) -->
-						<topic>/$(arg robot_name)/${name}</topic>
-
-						<!-- Frame-Name, der in die Cloud geschrieben wird -->
+						<update_on_paused_sim>false</update_on_paused_sim>
+						<topic>/$(arg robot_name)/${name}/points</topic>
 						<frame>${name}_laser_frame</frame>
-
-						<!-- Livox Scanmuster (setzt RGL_PATTERNS_DIR voraus) -->
 						<pattern_preset>Livox Mid360</pattern_preset>
 					</plugin>
+					<always_on>1</always_on>
+					<visualize>${visualize}</visualize>
 				</sensor>
 			</xacro:if>
-
-			<!-- ===== Fallback: bisheriger gpu_lidar ===== -->
+			<!-- ===== Fallback: gpu_lidar ===== -->
 			<xacro:unless value="${use_rgl}">
 				<sensor name='gpu_lidar_${name}' type='gpu_lidar'>
 					<pose relative_to='${name}_laser_frame'>0 0 0 0 0 0</pose>
