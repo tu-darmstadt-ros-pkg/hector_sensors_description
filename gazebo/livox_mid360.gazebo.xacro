@@ -13,7 +13,7 @@
 					<plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
 						<range>
 							<min>0</min>
-							<max>245</max>
+							<max>40</max>
 						</range>
 						<update_rate>10</update_rate>
 						<update_on_paused_sim>false</update_on_paused_sim>
