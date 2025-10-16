@@ -29,9 +29,8 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://hector_sensors_description/meshes/orbbec_gemini2/orbbec_gemini2.stl"/>
+                    <mesh filename="package://hector_sensors_description/meshes/orbbec_gemini2/orbbec_gemini2.dae"/>
                 </geometry>
-                <material name="black"/>
             </visual>
             <collision>
                 <origin xyz="0.018 0 0" rpy="0 0 0" />
