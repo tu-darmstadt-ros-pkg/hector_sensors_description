@@ -50,7 +50,7 @@
     </xacro:tis_zoom_camera_model>
 
     <xacro:generic_camera name="${name}" robot_name="${robot_name}" parent="${name}_housing_frame" ros_topic="image_raw" cam_info_topic="camera_info" update_rate="5" res_x="1920" res_y="1080" image_format="R8G8B8" hfov="70">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.04 0.0 0.0" rpy="0 0 0"/>
     </xacro:generic_camera>
   </xacro:macro>
 

@@ -1,27 +1,32 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-    <xacro:macro name="os0_128_gazebo" params="name robot_name update_rate horizontal_samples vertical_samples min_range max_range">
-        <gazebo reference="${name}_frame">
-            <sensor name="${name}-OS0-128" type="gpu_lidar">
-                <visualize>false</visualize>
-                <always_on>true</always_on>
+	<xacro:property name="M_PI" value="3.14159"/>
+
+    <xacro:macro name="os0_128_gazebo" params="name update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
+        <gazebo reference="${name}_laser_frame">
+            <sensor name="gpu_lidar_${name}" type="gpu_lidar">
+            	<pose relative_to='${name}_laser_frame'>0 0 0 0 0 0</pose>
+                <topic>/$(arg robot_name)/${name}</topic>
                 <update_rate>${update_rate}</update_rate>
-                <topic>${robot_name}/${name}/scan</topic>
-                <!--gz_frame_id>${name}_frame</gz_frame_id-->
-                <lidar>
+                <gz_frame_id>${name}_laser_frame</gz_frame_id>
+
+                <always_on>1</always_on>
+                <visualize>True</visualize>
+
+                <ray>
                     <scan>
                         <horizontal>
-                        <samples>${horizontal_samples}</samples>
-                        <resolution>1</resolution>
-                        <min_angle>-${pi}</min_angle>
-                        <max_angle>${pi}</max_angle>
+                            <samples>${horizontal_samples}</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-${pi}</min_angle>
+                            <max_angle>${pi}</max_angle>
                         </horizontal>
                         <vertical>
-                        <samples>${vertical_samples}</samples>
-                        <resolution>1</resolution>
-                        <min_angle>-${45.0*pi/180.0}</min_angle>
-                        <max_angle>${45.0*pi/180.0}</max_angle>
+                            <samples>${vertical_samples}</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-${min_angle*pi/180.0}</min_angle>
+                            <max_angle>${max_angle*pi/180.0}</max_angle>
                         </vertical>
                     </scan>
                     <range>
@@ -29,12 +34,7 @@
                         <max>${max_range}</max>
                         <resolution>0.003</resolution>
                     </range>
-                    <noise>
-                        <type>gaussian</type>
-                        <mean>0.0</mean>
-                        <stddev>0.008</stddev>
-                    </noise>
-                </lidar>
+                </ray>
             </sensor>
         </gazebo>
     </xacro:macro>

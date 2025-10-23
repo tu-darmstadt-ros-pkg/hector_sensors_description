@@ -10,6 +10,10 @@
 				<topic>/$(arg robot_name)/${name}</topic>
 				<update_rate>10</update_rate>
 				<gz_frame_id>${name}_laser_frame</gz_frame_id>
+
+				<always_on>1</always_on>
+                <visualize>${visualize}</visualize>
+
 				<ray>
 					<scan>
 						<horizontal>
@@ -31,8 +35,6 @@
 						<resolution>0.01</resolution>
 					</range>
 				</ray>
-				<always_on>1</always_on>
-				<visualize>${visualize}</visualize>
 			</sensor>
 		</gazebo>
 	</xacro:macro>
