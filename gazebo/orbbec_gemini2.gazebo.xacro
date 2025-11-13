@@ -11,15 +11,16 @@
 				<visualize>true</visualize>
 				<update_rate>15</update_rate>
 				<topic>/$(arg robot_name)/${name}/rgb/image_raw</topic>
-				<gz_frame_id>${name}_rgb_link</gz_frame_id>
+				<gz_frame_id>${name}_rgb_frame</gz_frame_id>
 
 				<camera name="${name}_camera">
 					<camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
 					<optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
-					<horizontal_fov>${90.0 * M_PI/180.0}</horizontal_fov>
+					<horizontal_fov>${63.0 * M_PI/180.0}</horizontal_fov>
+					<vertical_fov>${50.0 * M_PI/180.0}</vertical_fov>
 					<image>
 						<format>R8G8B8</format>
-						<width>720</width>
+						<width>640</width>
 						<height>480</height>
 					</image>
 					<clip>
@@ -29,17 +30,19 @@
 				</camera>
 			</sensor>
 
+            <!-- Depth Image of real camera is already registered to RGB image and has the same camera info -->
 			<sensor type="depth_camera" name="${name}_depth">
 				<always_on>true</always_on>
 				<visualize>true</visualize>
 				<update_rate>15</update_rate>
 				<topic>/$(arg robot_name)/${name}/depth/image_raw</topic>
-				<gz_frame_id>${name}_depth_link</gz_frame_id>
+				<gz_frame_id>${name}_depth_frame</gz_frame_id>
 
 				<camera>
 					<camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
 					<optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
-					<horizontal_fov>1.047</horizontal_fov>
+					<horizontal_fov>${63.0 * M_PI/180.0}</horizontal_fov>
+                    <vertical_fov>${50.0 * M_PI/180.0}</vertical_fov>
 					<image>
 						<format>R_FLOAT32</format>
 						<width>640</width>
@@ -47,7 +50,7 @@
 					</image>
 					<depth_camera>
 						<clip>
-							<near>0.1</near>
+							<near>0.15</near>
 							<far>10.0</far>
 						</clip>
 					</depth_camera>
@@ -62,17 +65,18 @@
 			<xacro:if value="$(arg semantic_segmentation)">
 				<sensor name="gemini2_${name}_segmentation_camera" type="segmentation">
 					<topic>/$(arg robot_name)/${name}/segmentation</topic>
-					<gz_frame_id>${name}_link</gz_frame_id>
+					<gz_frame_id>${name}_rgb_link</gz_frame_id>
 					<camera>
-						<optical_frame_id>${name}_optical_frame</optical_frame_id>
+						<optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
 						<segmentation_type>instance</segmentation_type>
-						<horizontal_fov>${90.0 * M_PI/180.0}</horizontal_fov>
+					    <horizontal_fov>${63.0 * M_PI/180.0}</horizontal_fov>
+					    <vertical_fov>${50.0 * M_PI/180.0}</vertical_fov>
 						<image>
-							<width>720</width>
+							<width>640</width>
 							<height>480</height>
 						</image>
 						<clip>
-							<near>0.1</near>
+							<near>0.05</near>
 							<far>10</far>
 						</clip>
 					</camera>

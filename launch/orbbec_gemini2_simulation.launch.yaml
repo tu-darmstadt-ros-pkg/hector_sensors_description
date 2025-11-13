@@ -1,0 +1,37 @@
+launch:
+- arg:
+    name: camera_name
+    default: orbbec_gemini2
+    description: Name of the camera to launch
+- node:
+    pkg: tf2_ros
+    exec: static_transform_publisher
+    name: $(var camera_name)_link_to_$(var camera_name)_depth_frame
+    args: "--x 0.01682 --y 0.010995 --z 0.0 --roll 0.0 --pitch 0.0 --yaw 0.0 --frame-id $(var camera_name)_link --child-frame-id $(var camera_name)_depth_frame"
+    remap:
+      - from: /tf_static
+        to: tf_static
+- node:
+    pkg: tf2_ros
+    exec: static_transform_publisher
+    name: $(var camera_name)_depth_frame_to_$(var camera_name)_depth_optical_frame
+    args: "--x 0.0 --y 0.0 --z 0.0 --roll -1.5708 --pitch 0.0 --yaw -1.5708 --frame-id $(var camera_name)_depth_frame --child-frame-id $(var camera_name)_depth_optical_frame"
+    remap:
+      - from: /tf_static
+        to: tf_static
+- node:
+    pkg: tf2_ros
+    exec: static_transform_publisher
+    name: $(var camera_name)_depth_frame_to_$(var camera_name)_color_frame
+    args: "--x 0.0 --y -0.01 --z 0.0 --roll 0.0 --pitch 0.0 --yaw 0.0 --frame-id $(var camera_name)_depth_frame --child-frame-id $(var camera_name)_color_frame"
+    remap:
+      - from: /tf_static
+        to: tf_static
+- node:
+    pkg: tf2_ros
+    exec: static_transform_publisher
+    name: $(var camera_name)_color_frame_to_$(var camera_name)_color_optical_frame
+    args: "--x 0.0 --y 0.0 --z 0.0 --roll -1.5708 --pitch 0.0 --yaw -1.5708 --frame-id $(var camera_name)_color_frame --child-frame-id $(var camera_name)_color_optical_frame"
+    remap:
+      - from: /tf_static
+        to: tf_static

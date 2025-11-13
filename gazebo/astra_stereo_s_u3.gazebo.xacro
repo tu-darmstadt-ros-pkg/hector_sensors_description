@@ -16,10 +16,12 @@
 				<camera name="${name}_camera">
 					<camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
 					<optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
-					<horizontal_fov>${90.0 * M_PI/180.0}</horizontal_fov>
+					<horizontal_fov>${71.5 * M_PI/180.0}</horizontal_fov>
+					<vertical_fov>${56.7 * M_PI/180.0}</vertical_fov>
+
 					<image>
 						<format>R8G8B8</format>
-						<width>720</width>
+						<width>640</width>
 						<height>480</height>
 					</image>
 					<clip>
@@ -29,6 +31,7 @@
 				</camera>
 			</sensor>
 
+            <!-- Depth Image of real camera is already registered to RGB image and has the same camera info -->
 			<sensor type="depth_camera" name="${name}_depth">
 				<always_on>true</always_on>
 				<visualize>true</visualize>
@@ -39,7 +42,9 @@
 				<camera>
 					<camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
 					<optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
-					<horizontal_fov>1.047</horizontal_fov>
+					<horizontal_fov>${71.5 * M_PI/180.0}</horizontal_fov>
+                    <vertical_fov>${56.7 * M_PI/180.0}</vertical_fov>
+
 					<image>
 						<format>R_FLOAT32</format>
 						<width>640</width>
@@ -47,7 +52,7 @@
 					</image>
 					<depth_camera>
 						<clip>
-							<near>0.1</near>
+							<near>0.25</near>
 							<far>10.0</far>
 						</clip>
 					</depth_camera>
