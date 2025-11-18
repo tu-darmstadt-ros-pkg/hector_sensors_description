@@ -33,7 +33,7 @@
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0.018 0 0" rpy="0 0 0" />
+                <origin xyz="0.0051 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="${orbbec_gemini2_length} ${orbbec_gemini2_width} ${orbbec_gemini2_height}" />
                 </geometry>
