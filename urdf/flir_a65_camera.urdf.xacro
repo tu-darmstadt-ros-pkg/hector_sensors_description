@@ -15,15 +15,15 @@
     <link name="${name}_frame">
       <xacro:inertial_sphere mass="0.21" diameter="0.07" />
       <visual>
-        <origin xyz="${0.1041*-0.5} 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <box size="0.1041 0.0496 0.0466" />
+          <mesh filename="package://hector_sensors_description/meshes/flir_ax5_camera/flir_ax5_housing.glb" />
         </geometry>
       </visual>
       <collision>
-        <origin xyz="${0.1041*-0.5} 0 0" rpy="0 0 0" />
+        <origin xyz="-0.05205 0 -0.0015" rpy="0 0 0" />
         <geometry>
-          <box size="0.1041 0.0496 0.0466" />
+          <box size="0.1041 0.04 0.043" />
         </geometry>
       </collision>
     </link>
@@ -46,4 +46,3 @@
   </xacro:macro>
 
 </robot>
-

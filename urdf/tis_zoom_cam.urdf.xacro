@@ -7,9 +7,9 @@
 
 
   <!-- Dimensions from https://s1-dl.theimagingsource.com/api/2.5/packages/documentation/factsheets-single/fsdfkz30gp031/5e87e13f-c891-50c8-93c1-7bffd94642a1/fsdfkz30gp031.de_DE.pdf -->
-  <xacro:property name="tis_zoom_cam_housing_width" value="0.0606" />
-  <xacro:property name="tis_zoom_cam_housing_height" value="0.0606" />
-  <xacro:property name="tis_zoom_cam_housing_length" value="0.117" />
+  <xacro:property name="tis_zoom_cam_housing_width" value="0.0706" />
+  <xacro:property name="tis_zoom_cam_housing_height" value="0.0706" />
+  <xacro:property name="tis_zoom_cam_housing_length" value="0.146" />
 
   <xacro:macro name="tis_zoom_camera_model" params="name parent *origin">
     <joint name="${name}_mount_joint" type="fixed">
@@ -19,18 +19,22 @@
     </joint>
 
     <link name="${name}_housing_frame">
-      <xacro:inertial_cuboid mass="0.02" x_length="0.0285" y_length="0.07" z_length="0.034"/>
+      <xacro:inertial_cuboid_with_pose
+        mass="0.02"
+        x_length="0.0285"
+        y_length="0.07"
+        z_length="0.034" >
+        <origin xyz="-0.073 0 0" rpy="0 0 0" />
+      </xacro:inertial_cuboid_with_pose>
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/tis_zoom_cam/zoom_cam_housing.stl" scale="1.0 1.0 1.0"/>
+          <mesh filename="package://hector_sensors_description/meshes/tis_zoom_cam/tis_zoom_cam.glb" />
         </geometry>
-        <material name="DarkGrey">
-          <color rgba="0.3 0.3 0.3 1"/>
-        </material>
       </visual>
       <collision>
+        <origin xyz="-0.073 0 0" rpy="0 0 0" />
         <geometry>
-          <box size="${tis_zoom_cam_housing_length} ${tis_zoom_cam_housing_width} ${tis_zoom_cam_housing_height}" />
+          <box size="0.146 0.0706 0.0706" />
         </geometry>
       </collision>
     </link>
@@ -50,9 +54,8 @@
     </xacro:tis_zoom_camera_model>
 
     <xacro:generic_camera name="${name}" robot_name="${robot_name}" parent="${name}_housing_frame" ros_topic="image_raw" cam_info_topic="camera_info" update_rate="5" res_x="1920" res_y="1080" image_format="R8G8B8" hfov="70">
-      <origin xyz="0.04 0.0 0.0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:generic_camera>
   </xacro:macro>
 
 </robot>
-

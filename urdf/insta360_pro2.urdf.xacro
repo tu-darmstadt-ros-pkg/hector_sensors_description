@@ -21,9 +21,8 @@
       <!-- Sphere body -->
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/insta360_pro2/insta_pro2.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="package://hector_sensors_description/meshes/insta360_pro2/insta_pro2.glb" />
         </geometry>
-        <material name="Grey" />
       </visual>
 
       <collision>
@@ -81,9 +80,8 @@
       <!-- Sphere body -->
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/insta360_pro2/insta_pro2.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="package://hector_sensors_description/meshes/insta360_pro2/insta_pro2.glb" />
         </geometry>
-        <material name="Grey" />
       </visual>
 
       <collision>
