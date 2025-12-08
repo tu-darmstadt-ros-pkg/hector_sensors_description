@@ -16,16 +16,8 @@
             <xacro:inertial_sphere mass="0.992" diameter="0.08082"/>
 
             <visual>
-                <origin xyz="0 0 -0.062825" rpy="0 0 0" />
                 <geometry>
-                    <mesh filename="package://hector_sensors_description/meshes/ouster_os0/os0_baseplate.dae" scale="0.001 0.001 0.001"/>
-                </geometry>
-            </visual>
-
-            <visual>
-                <origin xyz="0 0 -0.040825" rpy="0 0 0" />
-                <geometry>
-                    <mesh filename="package://hector_sensors_description/meshes/ouster_os0/os0.dae" scale="0.001 0.001 0.001"/>
+                    <mesh filename="package://hector_sensors_description/meshes/os0_128/os0_128.glb" />
                 </geometry>
             </visual>
 

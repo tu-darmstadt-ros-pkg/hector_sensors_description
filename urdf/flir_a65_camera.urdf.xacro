@@ -17,7 +17,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/flir_ax5_camera/flir_ax5_housing.glb" />
+          <mesh filename="package://hector_sensors_description/meshes/flir_ax5_camera/flir_ax5_camera.glb" />
         </geometry>
       </visual>
       <collision>

@@ -5,12 +5,6 @@
   <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
   <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro" />
 
-
-  <!-- Dimensions from https://s1-dl.theimagingsource.com/api/2.5/packages/documentation/factsheets-single/fsdfkz30gp031/5e87e13f-c891-50c8-93c1-7bffd94642a1/fsdfkz30gp031.de_DE.pdf -->
-  <xacro:property name="tis_zoom_cam_housing_width" value="0.0706" />
-  <xacro:property name="tis_zoom_cam_housing_height" value="0.0706" />
-  <xacro:property name="tis_zoom_cam_housing_length" value="0.146" />
-
   <xacro:macro name="tis_zoom_camera_model" params="name parent *origin">
     <joint name="${name}_mount_joint" type="fixed">
       <xacro:insert_block name="origin" />
