@@ -26,7 +26,7 @@
 
         <!-- Camera base -->
         <link name="${name}_link">
-            <xacro:inertial_cuboid mass="${orbbec_astra_stereo_s_u3_mass}" x_length="${orbbec_astra_stereo_s_u3_length}" y_length="${orbbec_astra_stereo_s_u3_width}" z_length="${orbbec_astra_stereo_s_u3_height}" />
+            <xacro:inertial_cuboid mass="${orbbec_astra_stereo_s_u3_mass}" x_length="${orbbec_astra_stereo_s_u3_width}" y_length="${orbbec_astra_stereo_s_u3_length}" z_length="${orbbec_astra_stereo_s_u3_height}" />
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
