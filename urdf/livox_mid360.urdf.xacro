@@ -37,6 +37,12 @@
 					<box size="${livox_mid360_length} ${livox_mid360_width} ${livox_mid360_height}" />
 				</geometry>
 			</collision>
+			<collision>
+                <origin xyz="0 0 0.039" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.03" />
+                </geometry>
+            </collision>
 		</link>
 
 		<link name="${name}_laser_frame"/>
