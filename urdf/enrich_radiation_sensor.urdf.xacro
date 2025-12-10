@@ -20,7 +20,7 @@
     <link name="${name}_base_link"/>
 
     <joint name="${name}_joint" type="fixed">
-      <origin xyz="0.0 0.0 ${rs_size_z / 2}" />
+      <origin xyz="0 0 ${rs_size_z / 2}" />
       <parent link="${name}_base_link" />
       <child link="radiation_sensor_link" />
     </joint>
