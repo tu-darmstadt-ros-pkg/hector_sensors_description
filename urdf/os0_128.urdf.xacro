@@ -1,78 +1,51 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
-  <xacro:include filename="$(find hector_sensors_description)/gazebo/os0_128.gazebo.xacro" />
-
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
+  <xacro:include filename="$(find hector_sensors_description)/gazebo/os0_128.gazebo.xacro"/>
   <xacro:macro name="os0_128_model" params="name *origin *parent">
     <joint name="${name}_joint" type="fixed">
-      <child link="${name}_link" />
-      <xacro:insert_block name="origin" />
-      <xacro:insert_block name="parent" />
+      <child link="${name}_link"/>
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="parent"/>
     </joint>
-
     <link name="${name}_link">
-      <xacro:inertial_sphere mass="0.992" diameter="0.08082" />
-
+      <xacro:inertial_sphere mass="0.992" diameter="0.08082"/>
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/os0_128/os0_128.glb" />
+          <mesh filename="package://hector_sensors_description/meshes/os0_128/os0_128.glb"/>
         </geometry>
       </visual>
-
       <collision>
-        <origin xyz="0 0 -0.000825" rpy="0 0 0" />
+        <origin xyz="0 0 -0.000825" rpy="0 0 0"/>
         <geometry>
-          <cylinder radius="0.04041" length="0.0735" />
+          <cylinder radius="0.04041" length="0.0735"/>
         </geometry>
       </collision>
-
       <collision>
-        <origin xyz="0 0 -0.047825" rpy="0 0 0" />
+        <origin xyz="0 0 -0.047825" rpy="0 0 0"/>
         <geometry>
-          <box size="0.11 0.11 0.0205" />
+          <box size="0.11 0.11 0.0205"/>
         </geometry>
       </collision>
     </link>
-
-    <link name="${name}_laser_frame" />
+    <link name="${name}_laser_frame"/>
     <joint name="${name}_sensor_joint_laser_frame" type="fixed">
-      <origin xyz="0 0 -0.01" rpy="0 0 ${-pi/2.0}" />
-      <parent link="${name}_link" />
-      <child link="${name}_laser_frame" />
+      <origin xyz="0 0 -0.01" rpy="0 0 ${-pi/2.0}"/>
+      <parent link="${name}_link"/>
+      <child link="${name}_laser_frame"/>
     </joint>
   </xacro:macro>
-
   <xacro:macro name="os0_128" params="name *origin *parent">
-    <xacro:os0_128_advanced_parameters
-      name="${name}"
-      update_rate="10"
-      horizontal_samples="512"
-      vertical_samples="128"
-      min_range="0.45"
-      max_range="100"
-      min_angle="45"
-      max_angle="45">
-      <xacro:insert_block name="origin" />
-      <xacro:insert_block name="parent" />
+    <xacro:os0_128_advanced_parameters name="${name}" update_rate="10" horizontal_samples="512" vertical_samples="128" min_range="0.45" max_range="100" min_angle="45" max_angle="45">
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="parent"/>
     </xacro:os0_128_advanced_parameters>
   </xacro:macro>
-
-  <xacro:macro
-    name="os0_128_advanced_parameters"
-    params="name *origin *parent update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
+  <xacro:macro name="os0_128_advanced_parameters" params="name *origin *parent update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
     <xacro:os0_128_model name="${name}">
-      <xacro:insert_block name="origin" />
-      <xacro:insert_block name="parent" />
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="parent"/>
     </xacro:os0_128_model>
-    <xacro:os0_128_gazebo
-      name="${name}" update_rate="${update_rate}"
-      horizontal_samples="${horizontal_samples}"
-      vertical_samples="${vertical_samples}"
-      min_range="${min_range}"
-      max_range="${max_range}"
-      min_angle="${min_angle}"
-      max_angle="${max_angle}" />
+    <xacro:os0_128_gazebo name="${name}" update_rate="${update_rate}" horizontal_samples="${horizontal_samples}" vertical_samples="${vertical_samples}" min_range="${min_range}" max_range="${max_range}" min_angle="${min_angle}" max_angle="${max_angle}"/>
   </xacro:macro>
 </robot>

@@ -1,55 +1,41 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:include filename="$(find hector_xacro_tools)/urdf/sensor_macros.urdf.xacro" />
-  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro" />
-  <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro" />
-
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/sensor_macros.urdf.xacro"/>
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
+  <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro"/>
   <xacro:macro name="tis_zoom_camera_model" params="name parent *origin">
     <joint name="${name}_mount_joint" type="fixed">
-      <xacro:insert_block name="origin" />
+      <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_housing_frame"/>
     </joint>
-
     <link name="${name}_housing_frame">
-      <xacro:inertial_cuboid_with_pose
-        mass="0.02"
-        x_length="0.0285"
-        y_length="0.07"
-        z_length="0.034" >
-        <origin xyz="-0.073 0 0" rpy="0 0 0" />
+      <xacro:inertial_cuboid_with_pose mass="0.02" x_length="0.0285" y_length="0.07" z_length="0.034">
+        <origin xyz="-0.073 0 0" rpy="0 0 0"/>
       </xacro:inertial_cuboid_with_pose>
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/tis_zoom_cam/tis_zoom_cam.glb" />
+          <mesh filename="package://hector_sensors_description/meshes/tis_zoom_cam/tis_zoom_cam.glb"/>
         </geometry>
       </visual>
       <collision>
-        <origin xyz="-0.073 0 0" rpy="0 0 0" />
+        <origin xyz="-0.073 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.146 0.0706 0.0706" />
+          <box size="0.146 0.0706 0.0706"/>
         </geometry>
       </collision>
     </link>
-
-<!--     <xacro:add_optical_frame name="${name}" /> -->
-
+    <!--     <xacro:add_optical_frame name="${name}" /> -->
     <gazebo reference="${name}_housing_frame">
       <material>Gazebo/Grey</material>
     </gazebo>
-
   </xacro:macro>
-
   <xacro:macro name="tis_zoom_camera" params="name robot_name parent *origin">
-
     <xacro:tis_zoom_camera_model name="${name}" parent="${parent}">
-      <xacro:insert_block name="origin" />
+      <xacro:insert_block name="origin"/>
     </xacro:tis_zoom_camera_model>
-
     <xacro:generic_camera name="${name}" robot_name="${robot_name}" parent="${name}_housing_frame" ros_topic="image_raw" cam_info_topic="camera_info" update_rate="5" res_x="1920" res_y="1080" image_format="R8G8B8" hfov="70">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:generic_camera>
   </xacro:macro>
-
 </robot>

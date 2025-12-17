@@ -1,18 +1,12 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-  <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_camera.gazebo.xacro" />
-
-  <xacro:macro
-    name="generic_camera"
-    params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
+  <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_camera.gazebo.xacro"/>
+  <xacro:macro name="generic_camera" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
     <joint name="${name}_joint" type="fixed">
-      <xacro:insert_block name="origin" />
-      <parent link="${parent}" />
-      <child link="${name}_link" />
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
     </joint>
-
     <link name="${name}_link">
       <!-- <inertial>
         <mass value="0.001" />
@@ -35,21 +29,12 @@
         </geometry>
       </collision>-->
     </link>
-
-    <link name="${name}_optical_frame" />
-
+    <link name="${name}_optical_frame"/>
     <joint name="${name}_optical_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
-      <parent link="${name}_link" />
-      <child link="${name}_optical_frame" />
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <parent link="${name}_link"/>
+      <child link="${name}_optical_frame"/>
     </joint>
-    <xacro:generic_camera_gazebo
-      name="${name}"
-      robot_name="${robot_name}"
-      update_rate="${update_rate}"
-      res_x="${res_x}"
-      res_y="${res_y}"
-      hfov="${hfov}"
-      image_format="${image_format}" />
+    <xacro:generic_camera_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" res_x="${res_x}" res_y="${res_y}" hfov="${hfov}" image_format="${image_format}"/>
   </xacro:macro>
 </robot>

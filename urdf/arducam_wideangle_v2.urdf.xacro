@@ -1,44 +1,37 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-
   <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_wide_angle_camera.gazebo.xacro"/>
-
   <xacro:macro name="arducam_wideangle_v2" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
     <joint name="${name}_joint" type="fixed">
-      <xacro:insert_block name="origin" />
+      <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_link"/>
     </joint>
-
     <link name="${name}_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/arducam_wideangle_v2/arducam_wideangle_v2.glb" />
+          <mesh filename="package://hector_sensors_description/meshes/arducam_wideangle_v2/arducam_wideangle_v2.glb"/>
         </geometry>
       </visual>
       <collision>
-        <origin xyz="0.006 -0.0001 0" rpy="0 0 0" />
+        <origin xyz="0.006 -0.0001 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.0209 0.0319 0.032" />
+          <box size="0.0209 0.0319 0.032"/>
         </geometry>
       </collision>
       <inertial>
-        <mass value="0.001" />
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+        <mass value="0.001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
       </inertial>
     </link>
-
     <link name="${name}_optical_frame"/>
-
     <joint name="${name}_optical_joint" type="fixed">
-      <origin xyz="0.016 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
-      <parent link="${name}_link" />
+      <origin xyz="0.016 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <parent link="${name}_link"/>
       <child link="${name}_optical_frame"/>
     </joint>
     <xacro:generic_wide_angle_camera_gazebo name="${name}" robot_name="${robot_name}" update_rate="${update_rate}" res_x="${res_x}" res_y="${res_y}" hfov="${hfov}" image_format="${image_format}"/>
-
   </xacro:macro>
 </robot>

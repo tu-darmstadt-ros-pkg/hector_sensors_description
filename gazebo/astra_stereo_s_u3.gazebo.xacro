@@ -1,10 +1,7 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:arg name="semantic_segmentation" default="false" />
-
-  <xacro:macro name="orbbec_astra_stereo_s_u3_gazebo"
-    params="name:=default semantic_segmentation:=false">
+  <xacro:arg name="semantic_segmentation" default="false"/>
+  <xacro:macro name="orbbec_astra_stereo_s_u3_gazebo" params="name:=default semantic_segmentation:=false">
     <gazebo reference="${name}_link">
       <sensor type="camera" name="${name}_rgb">
         <always_on>true</always_on>
@@ -12,13 +9,11 @@
         <update_rate>15</update_rate>
         <topic>/$(arg robot_name)/${name}/rgb/image_raw</topic>
         <gz_frame_id>${name}_rgb_link</gz_frame_id>
-
         <camera name="${name}_camera">
           <camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
           <optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(71.5)}</horizontal_fov>
           <vertical_fov>${radians(56.7)}</vertical_fov>
-
           <image>
             <format>R8G8B8</format>
             <width>640</width>
@@ -30,7 +25,6 @@
           </clip>
         </camera>
       </sensor>
-
       <!-- Depth Image of real camera is already registered to RGB image and has the same camera
       info -->
       <sensor type="depth_camera" name="${name}_depth">
@@ -39,13 +33,11 @@
         <update_rate>15</update_rate>
         <topic>/$(arg robot_name)/${name}/depth/image_raw</topic>
         <gz_frame_id>${name}_depth_link</gz_frame_id>
-
         <camera>
           <camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
           <optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(71.5)}</horizontal_fov>
           <vertical_fov>${radians(56.7)}</vertical_fov>
-
           <image>
             <format>R_FLOAT32</format>
             <width>640</width>
@@ -64,7 +56,6 @@
           </noise>
         </camera>
       </sensor>
-
       <xacro:if value="$(arg semantic_segmentation)">
         <sensor name="astra2_${name}_segmentation_camera" type="segmentation">
           <topic>/$(arg robot_name)/${name}/segmentation</topic>

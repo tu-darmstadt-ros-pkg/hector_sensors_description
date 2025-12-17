@@ -1,9 +1,6 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-
-  <xacro:macro name="insta360_pro2_gazebo"
-    params="camera_name robot_name ros_topic update_rate fov image_format res_x res_y">
+  <xacro:macro name="insta360_pro2_gazebo" params="camera_name robot_name ros_topic update_rate fov image_format res_x res_y">
     <gazebo reference="${camera_name}_link">
       <sensor type="wideanglecamera" name="${camera_name}_camera_sensor">
         <update_rate>${update_rate}</update_rate>

@@ -1,44 +1,35 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- A rough description of a thermo scientific personal radiation detector packed in a box -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-
-  <xacro:property name="rs_size_x" value="0.103" />
-  <xacro:property name="rs_size_y" value="0.078" />
-  <xacro:property name="rs_size_z" value="0.049" />
-
-  <xacro:macro
-    name="radiation_sensor"
-    params="name:='radiation_sensor' *origin parent">
-
+  <xacro:property name="rs_size_x" value="0.103"/>
+  <xacro:property name="rs_size_y" value="0.078"/>
+  <xacro:property name="rs_size_z" value="0.049"/>
+  <xacro:macro name="radiation_sensor" params="name:='radiation_sensor' *origin parent">
     <joint name="${name}_base_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_base_link"/>
     </joint>
-
     <link name="${name}_base_link"/>
-
     <joint name="${name}_joint" type="fixed">
-      <origin xyz="0 0 ${rs_size_z / 2}" />
-      <parent link="${name}_base_link" />
-      <child link="radiation_sensor_link" />
+      <origin xyz="0 0 ${rs_size_z / 2}"/>
+      <parent link="${name}_base_link"/>
+      <child link="radiation_sensor_link"/>
     </joint>
-
     <link name="${name}_link">
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="${rs_size_x} ${rs_size_y} ${rs_size_z}" />
+          <box size="${rs_size_x} ${rs_size_y} ${rs_size_z}"/>
         </geometry>
         <material name="Black">
-          <color rgba="0.01 0.01 0.01 1.0" />
+          <color rgba="0.01 0.01 0.01 1.0"/>
         </material>
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="${rs_size_x} ${rs_size_y} ${rs_size_z}" />
+          <box size="${rs_size_x} ${rs_size_y} ${rs_size_z}"/>
         </geometry>
       </collision>
     </link>
