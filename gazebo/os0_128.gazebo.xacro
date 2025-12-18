@@ -1,41 +1,36 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-	<xacro:property name="M_PI" value="3.14159"/>
-
-    <xacro:macro name="os0_128_gazebo" params="name update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
-        <gazebo reference="${name}_laser_frame">
-            <sensor name="gpu_lidar_${name}" type="gpu_lidar">
-            	<pose relative_to='${name}_laser_frame'>0 0 0 0 0 0</pose>
-                <topic>/$(arg robot_name)/${name}</topic>
-                <update_rate>${update_rate}</update_rate>
-                <gz_frame_id>${name}_laser_frame</gz_frame_id>
-
-                <always_on>1</always_on>
-                <visualize>True</visualize>
-
-                <ray>
-                    <scan>
-                        <horizontal>
-                            <samples>${horizontal_samples}</samples>
-                            <resolution>1</resolution>
-                            <min_angle>-${pi}</min_angle>
-                            <max_angle>${pi}</max_angle>
-                        </horizontal>
-                        <vertical>
-                            <samples>${vertical_samples}</samples>
-                            <resolution>1</resolution>
-                            <min_angle>-${min_angle*pi/180.0}</min_angle>
-                            <max_angle>${max_angle*pi/180.0}</max_angle>
-                        </vertical>
-                    </scan>
-                    <range>
-                        <min>${min_range}</min>
-                        <max>${max_range}</max>
-                        <resolution>0.003</resolution>
-                    </range>
-                </ray>
-            </sensor>
-        </gazebo>
-    </xacro:macro>
+  <xacro:macro name="os0_128_gazebo" params="name update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
+    <gazebo reference="${name}_laser_frame">
+      <sensor name="gpu_lidar_${name}" type="gpu_lidar">
+        <pose relative_to="${name}_laser_frame">0 0 0 0 0 0</pose>
+        <topic>/$(arg robot_name)/${name}</topic>
+        <update_rate>${update_rate}</update_rate>
+        <gz_frame_id>${name}_laser_frame</gz_frame_id>
+        <always_on>1</always_on>
+        <visualize>True</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>${horizontal_samples}</samples>
+              <resolution>1</resolution>
+              <min_angle>-${pi}</min_angle>
+              <max_angle>${pi}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>${vertical_samples}</samples>
+              <resolution>1</resolution>
+              <min_angle>-${min_angle*pi/180.0}</min_angle>
+              <max_angle>${max_angle*pi/180.0}</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>${min_range}</min>
+            <max>${max_range}</max>
+            <resolution>0.003</resolution>
+          </range>
+        </ray>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
 </robot>

@@ -1,51 +1,44 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:property name="M_PI" value="3.1415926535897931" />
-
-    <xacro:include filename="$(find hector_sensors_description)/gazebo/intel_realsense_d435.gazebo.xacro"/>
-
-    <xacro:macro name="intel_realsense_d435" params="name *origin *parent">
-        <xacro:intel_realsense_d435_gazebo name="${name}" />
-
-        <xacro:property name="intel_realsense_d435_width" value="0.09"/>
-        <xacro:property name="intel_realsense_d435_height" value="0.025"/>
-        <xacro:property name="intel_realsense_d435_depth" value="0.025"/>
-        <xacro:property name="intel_realsense_d435_front_to_depth" value="0.0042" /> <!-- RealSense_D400_Family_Datasheet_Jan2019.pdf, page 64 -->
-        <xacro:property name="intel_realsense_d435_mount_hole_to_front" value="0.0149" /> <!-- Measured from CAD file -->
-        <xacro:property name="intel_realsense_d435_case_offset_x" value="${intel_realsense_d435_front_to_depth - intel_realsense_d435_depth/2.0}"/>
-        <xacro:property name="intel_realsense_d435_case_offset_y" value="-0.0175"/> <!-- mounting hole to depth frame, RealSense_D400_Family_Datasheet_Jan2019.pdf, page 66 -->
-        <xacro:property name="intel_realsense_d435_case_offset_z" value="0.0"/>
-
-        <joint name="${name}_joint" type="fixed">
-            <child link="${name}_link"/>
-            <xacro:insert_block name="origin"/>
-            <xacro:insert_block name="parent"/>
-        </joint>
-
-        <!-- Camera base -->
-        <link name="${name}_link">
-            <inertial>
-                <mass value="0.072" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <inertia ixx="5.8083e-4" ixy="0" ixz="0" iyy="3.0833e-5" iyz="0" izz="5.9083e-4" />
-            </inertial>
-            <visual>
-                <origin xyz="${intel_realsense_d435_front_to_depth} ${intel_realsense_d435_case_offset_y} 0.0" rpy="${M_PI/2} 0 ${M_PI/2}" />
-                <geometry>
-                    <mesh filename="package://hector_sensors_description/meshes/intel_realsense_d435/D435.dae" scale="0.001 0.001 0.001" />
-                </geometry>
-            </visual>
-            <collision>
-                <origin xyz="${intel_realsense_d435_case_offset_x} ${intel_realsense_d435_case_offset_y} ${intel_realsense_d435_case_offset_z}" rpy="0 0 0" />
-                <geometry>
-                    <!--Dimensions taken from https://click.intel.com/intelr-realsensetm-depth-camera-d435.html-->
-                    <box size="${intel_realsense_d435_depth} ${intel_realsense_d435_width} ${intel_realsense_d435_height}" />
-                </geometry>
-            </collision>
-        </link>
-
-    </xacro:macro>
-
+  <xacro:include filename="$(find hector_sensors_description)/gazebo/intel_realsense_d435.gazebo.xacro"/>
+  <xacro:macro name="intel_realsense_d435" params="name *origin *parent">
+    <xacro:intel_realsense_d435_gazebo name="${name}"/>
+    <xacro:property name="intel_realsense_d435_width" value="0.09"/>
+    <xacro:property name="intel_realsense_d435_height" value="0.025"/>
+    <xacro:property name="intel_realsense_d435_depth" value="0.025"/>
+    <xacro:property name="intel_realsense_d435_front_to_depth" value="0.0042"/>
+    <!-- RealSense_D400_Family_Datasheet_Jan2019.pdf, page 64 -->
+    <xacro:property name="intel_realsense_d435_mount_hole_to_front" value="0.0149"/>
+    <!-- Measured from CAD file -->
+    <xacro:property name="intel_realsense_d435_case_offset_x" value="${intel_realsense_d435_front_to_depth - intel_realsense_d435_depth/2.0}"/>
+    <xacro:property name="intel_realsense_d435_case_offset_y" value="-0.0175"/>
+    <!-- mounting hole to depth frame, RealSense_D400_Family_Datasheet_Jan2019.pdf, page 66 -->
+    <xacro:property name="intel_realsense_d435_case_offset_z" value="0.0"/>
+    <joint name="${name}_joint" type="fixed">
+      <child link="${name}_link"/>
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="parent"/>
+    </joint>
+    <!-- Camera base -->
+    <link name="${name}_link">
+      <inertial>
+        <mass value="0.072"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="5.8083e-4" ixy="0" ixz="0" iyy="3.0833e-5" iyz="0" izz="5.9083e-4"/>
+      </inertial>
+      <visual>
+        <origin xyz="${intel_realsense_d435_front_to_depth} ${intel_realsense_d435_case_offset_y} 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry>
+          <mesh filename="package://hector_sensors_description/meshes/intel_realsense_d435/D435.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="${intel_realsense_d435_case_offset_x} ${intel_realsense_d435_case_offset_y} ${intel_realsense_d435_case_offset_z}" rpy="0 0 0"/>
+        <geometry>
+          <!--Dimensions taken from https://click.intel.com/intelr-realsensetm-depth-camera-d435.html-->
+          <box size="${intel_realsense_d435_depth} ${intel_realsense_d435_width} ${intel_realsense_d435_height}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
 </robot>
-

@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find hector_sensors_description)/gazebo/generic_wide_angle_camera.gazebo.xacro"/>
-  <xacro:macro name="generic_wide_angle_camera" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
+  <xacro:macro name="arducam_wideangle_v2" params="name parent robot_name *origin ros_topic cam_info_topic update_rate res_x res_y image_format hfov">
     <joint name="${name}_joint" type="fixed">
       <xacro:insert_block name="origin"/>
       <parent link="${parent}"/>
       <child link="${name}_link"/>
     </joint>
     <link name="${name}_link">
-      <inertial>
-        <mass value="0.01"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
-      </inertial>
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.0017 0.032 0.032"/>
+          <mesh filename="package://hector_sensors_description/meshes/arducam_wideangle_v2/arducam_wideangle_v2.glb"/>
         </geometry>
-        <material name="Black">
-          <color rgba="0.0 0.0 0.0 1"/>
-        </material>
-      </visual>
-      <visual>
-        <origin xyz="0.00725 0 0" rpy="0 ${pi/2} 0"/>
-        <geometry>
-          <cylinder radius="0.0086" length="0.0145"/>
-        </geometry>
-        <material name="Black">
-          <color rgba="0.0 0.0 0.0 1"/>
-        </material>
       </visual>
       <collision>
-        <origin xyz="0.00725 0 0" rpy="0 0 0"/>
+        <origin xyz="0.006 -0.0001 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.016 0.032 0.032"/>
+          <box size="0.0209 0.0319 0.032"/>
         </geometry>
       </collision>
+      <inertial>
+        <mass value="0.001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+      </inertial>
     </link>
     <link name="${name}_optical_frame"/>
     <joint name="${name}_optical_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <origin xyz="0.016 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
       <parent link="${name}_link"/>
       <child link="${name}_optical_frame"/>
     </joint>
