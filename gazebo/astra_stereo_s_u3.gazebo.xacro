@@ -3,15 +3,15 @@
   <xacro:arg name="semantic_segmentation" default="false"/>
   <xacro:macro name="orbbec_astra_stereo_s_u3_gazebo" params="name:=default semantic_segmentation:=false">
     <gazebo reference="${name}_link">
-      <sensor type="camera" name="${name}_rgb">
+      <sensor type="camera" name="${name}_color">
         <always_on>true</always_on>
         <visualize>true</visualize>
         <update_rate>15</update_rate>
-        <topic>/$(arg robot_name)/${name}/rgb/image_raw</topic>
-        <gz_frame_id>${name}_rgb_link</gz_frame_id>
+        <topic>/$(arg robot_name)/${name}/color/image_raw</topic>
+        <gz_frame_id>${name}_color_link</gz_frame_id>
         <camera name="${name}_camera">
-          <camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
-          <optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
+          <camera_info_topic>/$(arg robot_name)/${name}/color/camera_info</camera_info_topic>
+          <optical_frame_id>${name}_color_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(71.5)}</horizontal_fov>
           <vertical_fov>${radians(56.7)}</vertical_fov>
           <image>
