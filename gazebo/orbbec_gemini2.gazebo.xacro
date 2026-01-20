@@ -59,7 +59,7 @@
       <xacro:if value="$(arg semantic_segmentation)">
         <sensor name="gemini2_${name}_segmentation_camera" type="segmentation">
           <topic>/$(arg robot_name)/${name}/segmentation</topic>
-          <gz_frame_id>${name}_color_link</gz_frame_id>
+          <gz_frame_id>${name}_color_frame</gz_frame_id>
           <camera>
             <optical_frame_id>${name}_color_optical_frame</optical_frame_id>
             <segmentation_type>instance</segmentation_type>

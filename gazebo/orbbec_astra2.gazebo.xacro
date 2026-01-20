@@ -3,15 +3,15 @@
   <xacro:arg name="semantic_segmentation" default="false"/>
   <xacro:macro name="orbbec_astra2_gazebo" params="name:=default semantic_segmentation:=false">
     <gazebo reference="${name}_link">
-      <sensor type="camera" name="${name}_rgb">
+      <sensor type="camera" name="${name}_color">
         <always_on>true</always_on>
         <visualize>true</visualize>
         <update_rate>15</update_rate>
-        <topic>/$(arg robot_name)/${name}/rgb/image_raw</topic>
-        <gz_frame_id>${name}_rgb_link</gz_frame_id>
+        <topic>/$(arg robot_name)/${name}/color/image_raw</topic>
+        <gz_frame_id>${name}_color_frame</gz_frame_id>
         <camera name="${name}_camera">
-          <camera_info_topic>/$(arg robot_name)/${name}/rgb/camera_info</camera_info_topic>
-          <optical_frame_id>${name}_rgb_optical_frame</optical_frame_id>
+          <camera_info_topic>/$(arg robot_name)/${name}/color/camera_info</camera_info_topic>
+          <optical_frame_id>${name}_color_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(90.0)}</horizontal_fov>
           <image>
             <format>R8G8B8</format>
@@ -29,7 +29,7 @@
         <visualize>true</visualize>
         <update_rate>15</update_rate>
         <topic>/$(arg robot_name)/${name}/depth/image_raw</topic>
-        <gz_frame_id>${name}_depth_link</gz_frame_id>
+        <gz_frame_id>${name}_depth_frame</gz_frame_id>
         <camera>
           <camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
           <optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
@@ -55,7 +55,7 @@
       <xacro:if value="$(arg semantic_segmentation)">
         <sensor name="astra2_${name}_segmentation_camera" type="segmentation">
           <topic>/$(arg robot_name)/${name}/segmentation</topic>
-          <gz_frame_id>${name}_link</gz_frame_id>
+          <gz_frame_id>${name}_frame</gz_frame_id>
           <camera>
             <optical_frame_id>${name}_optical_frame</optical_frame_id>
             <segmentation_type>instance</segmentation_type>
