@@ -36,5 +36,11 @@
       <parent link="${name}_link"/>
       <child link="${name}_laser_frame"/>
     </joint>
+    <link name="${name}_imu_frame"/>
+    <joint name="${name}_sensor_joint_imu_frame" type="fixed">
+      <origin xyz="-0.011 -0.02329 0.04412" rpy="0 0 0"/>
+      <parent link="${name}_link"/>
+      <child link="${name}_imu_frame"/>
+    </joint>
   </xacro:macro>
 </robot>
