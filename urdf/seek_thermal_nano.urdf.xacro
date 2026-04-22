@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- datasheet: https://cdn-reichelt.de/documents/datenblatt/D100/NANO_DB-EN.pdf -->
+  <xacro:property name="seek_thermal_nano_mass" value="0.013"/>
+  <xacro:property name="seek_thermal_nano_length" value="0.025"/>
+  <xacro:property name="seek_thermal_nano_width" value="0.022"/>
+  <xacro:property name="seek_thermal_nano_height" value="0.025"/>
+  <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
+  <xacro:macro name="seek_thermal_nano" params="name *origin *parent">
+    <joint name="${name}_joint" type="fixed">
+      <child link="${name}_link"/>
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="parent"/>
+    </joint>
+    <!-- Camera base -->
+    <link name="${name}_link">
+      <xacro:inertial_cuboid mass="${seek_thermal_nano_mass}" x_length="${seek_thermal_nano_length}" y_length="${seek_thermal_nano_width}" z_length="${seek_thermal_nano_height}"/>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <!--mesh filename="package://hector_sensors_description/meshes/seek_thermal_nano/seek_thermal_nano.glb"/-->
+          <box size="${seek_thermal_nano_length} ${seek_thermal_nano_width} ${seek_thermal_nano_height}"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.013 0 -0.011" rpy="0 0 0"/>
+        <geometry>
+          <box size="${seek_thermal_nano_length} ${seek_thermal_nano_width} ${seek_thermal_nano_height}"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="${name}_thermal_link"/>
+    <joint name="${name}_thermal_joint" type="fixed">
+      <origin xyz="0.025 0 0" rpy="0 0 0"/>
+      <parent link="${name}_link"/>
+      <child link="${name}_thermal_link"/>
+    </joint>
+    <!-- Camera optical frame -->
+    <link name="${name}_optical_frame"/>
+    <joint name="${name}_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="-${pi/2} 0 -${pi/2}"/>
+      <parent link="${name}_thermal_link"/>
+      <child link="${name}_optical_frame"/>
+    </joint>
+  </xacro:macro>
+</robot>
