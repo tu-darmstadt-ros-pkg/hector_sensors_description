@@ -18,8 +18,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <!--mesh filename="package://hector_sensors_description/meshes/seek_thermal_nano/seek_thermal_nano.glb"/-->
-          <box size="${seek_thermal_nano_length} ${seek_thermal_nano_width} ${seek_thermal_nano_height}"/>
+          <mesh filename="package://hector_sensors_description/meshes/seek_thermal_nano/seek_thermal_nano.glb"/>
         </geometry>
       </visual>
       <collision>
