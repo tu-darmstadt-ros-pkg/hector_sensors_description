@@ -4,7 +4,6 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
 from tf_transformations import quaternion_from_euler
-from launch.actions import TimerAction
 
 
 def generate_launch_description():
@@ -85,15 +84,9 @@ def generate_launch_description():
         [
             DeclareLaunchArgument("ros_namespace", default_value="athena"),
             DeclareLaunchArgument("camera_name", default_value="orbbec_gemini2"),
-            # Add a delay to ensure the container is ready
-            TimerAction(
-                period=1.0,  # Wait 1 seconds for the container to initialize
-                actions=[
-                    LoadComposableNodes(
-                        target_container=[ns, "/static_tf_publisher_container"],
-                        composable_node_descriptions=composable_nodes,
-                    )
-                ],
+            LoadComposableNodes(
+                target_container=[ns, "/static_tf_publisher_container"],
+                composable_node_descriptions=composable_nodes,
             ),
         ]
     )
