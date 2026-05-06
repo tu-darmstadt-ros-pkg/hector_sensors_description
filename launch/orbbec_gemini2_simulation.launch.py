@@ -5,10 +5,13 @@ from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
 from tf_transformations import quaternion_from_euler
 
+# Note that the container needs to be created before the composable node of this launch file can be created.
+
 
 def generate_launch_description():
     ns = LaunchConfiguration("ros_namespace")
     cam = LaunchConfiguration("camera_name")
+    container_name = LaunchConfiguration("static_container_name")
 
     # Define the transforms using list concatenation for substitutions
     transforms = [
@@ -39,7 +42,7 @@ def generate_launch_description():
             "roll": 0.0,
             "pitch": 0.0,
             "yaw": 0.0,
-            "parent": "_depth_frame",
+            "parent": "_link",
             "child": "_color_frame",
         },
         {
@@ -82,10 +85,13 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument("ros_namespace", default_value="athena"),
+            DeclareLaunchArgument("ros_namespace", default_value=""),
             DeclareLaunchArgument("camera_name", default_value="orbbec_gemini2"),
+            DeclareLaunchArgument(
+                "static_container_name", default_value="static_tf_publisher_container"
+            ),
             LoadComposableNodes(
-                target_container=[ns, "/static_tf_publisher_container"],
+                target_container=[ns, "/", container_name],
                 composable_node_descriptions=composable_nodes,
             ),
         ]
