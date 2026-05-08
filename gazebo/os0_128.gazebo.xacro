@@ -2,7 +2,9 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="os0_128_gazebo" params="name update_rate horizontal_samples vertical_samples min_range max_range min_angle max_angle">
     <gazebo reference="${name}_laser_frame">
-      <sensor name="gpu_lidar_${name}" type="gpu_lidar">
+      
+      
+      <!-- <sensor name="gpu_lidar_${name}" type="gpu_lidar">
         <pose relative_to="${name}_laser_frame">0 0 0 0 0 0</pose>
         <topic>/$(arg robot_name)/${name}</topic>
         <update_rate>${update_rate}</update_rate>
@@ -30,7 +32,22 @@
             <resolution>0.003</resolution>
           </range>
         </ray>
+      </sensor> -->
+
+      <sensor name="rgl_lidar_${name}" type="custom">
+        <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+          <range>
+              <min>0</min>
+              <max>70</max>
+          </range>
+          <update_rate>10</update_rate>
+          <update_on_paused_sim>false</update_on_paused_sim>
+          <topic>/$(arg robot_name)/${name}</topic>
+          <frame>{name}_laser_frame</frame>
+          <pattern_preset>OS0 128</pattern_preset>
+        </plugin>
       </sensor>
+
     </gazebo>
   </xacro:macro>
 </robot>
