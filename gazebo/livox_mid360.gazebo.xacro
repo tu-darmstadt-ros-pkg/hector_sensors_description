@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="livox_mid360_gazebo" params="visualize:=True name:=default">
     <gazebo reference="${name}_laser_frame">
-      <sensor name="gpu_lidar_${name}" type="gpu_lidar">
+      <!-- <sensor name="gpu_lidar_${name}" type="gpu_lidar">
         <pose relative_to="${name}_laser_frame">0 0 0 0 0 0</pose>
         <topic>/$(arg robot_name)/${name}</topic>
         <update_rate>10</update_rate>
@@ -30,6 +30,20 @@
             <resolution>0.01</resolution>
           </range>
         </ray>
+      </sensor> -->
+      <sensor name="rgl_lidar_${name}" type="custom">
+        <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+          <range>
+              <min>0</min>
+              <max>70</max>
+          </range>
+          <update_rate>10</update_rate>
+          <update_on_paused_sim>false</update_on_paused_sim>
+          <pose relative_to="${name}_laser_frame">0 0 0 0 0 0</pose>
+          <topic>/$(arg robot_name)/${name}</topic>
+          <frame>{name}_laser_frame</frame>
+          <pattern_preset>Livox Mid360</pattern_preset>
+        </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>
