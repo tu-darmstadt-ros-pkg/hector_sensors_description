@@ -57,7 +57,7 @@
         </camera>
       </sensor>
       <xacro:if value="$(arg semantic_segmentation)">
-        <sensor name="astra2_${name}_segmentation_camera" type="segmentation">
+        <sensor name="${name}_segmentation_camera" type="segmentation">
           <topic>/$(arg robot_name)/${name}/segmentation</topic>
           <gz_frame_id>${name}_link</gz_frame_id>
           <camera>

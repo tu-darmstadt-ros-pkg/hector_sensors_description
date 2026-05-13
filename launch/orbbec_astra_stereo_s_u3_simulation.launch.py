@@ -86,7 +86,9 @@ def generate_launch_description():
     return LaunchDescription(
         [
             DeclareLaunchArgument("ros_namespace", default_value=""),
-            DeclareLaunchArgument("camera_name", default_value="astra_stereo_s_u3"),
+            DeclareLaunchArgument(
+                "camera_name", default_value="orbbec_astra_stereo_s_u3"
+            ),
             DeclareLaunchArgument(
                 "static_container_name", default_value="static_tf_publisher_container"
             ),
