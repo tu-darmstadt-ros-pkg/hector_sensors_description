@@ -9,15 +9,14 @@ from tf_transformations import quaternion_from_euler
 
 
 def generate_launch_description():
-    ns = LaunchConfiguration("ros_namespace")
-    cam = LaunchConfiguration("static_container_name")
-    container_name = LaunchConfiguration("static_container_name")
+    camera_name = LaunchConfiguration("camera_name")
+    container_name = LaunchConfiguration("container_name")
 
     # Define the transforms using list concatenation for substitutions
     transforms = [
         {
-            "x": 0.033,
-            "y": 0.022,
+            "x": 0.0,
+            "y": 0.0,
             "z": 0.0,
             "roll": 0.0,
             "pitch": 0.0,
@@ -36,13 +35,13 @@ def generate_launch_description():
             "child": "_depth_optical_frame",
         },
         {
-            "x": 0.033,
-            "y": -0.022,
+            "x": 0.0,
+            "y": -0.01,
             "z": 0.0,
             "roll": 0.0,
             "pitch": 0.0,
             "yaw": 0.0,
-            "parent": "_link",
+            "parent": "_depth_frame",
             "child": "_color_frame",
         },
         {
@@ -65,7 +64,7 @@ def generate_launch_description():
             ComposableNode(
                 package="tf2_ros",
                 plugin="tf2_ros::StaticTransformBroadcasterNode",
-                name=[cam, tf["parent"], "_to_", cam, tf["child"]],
+                name=[camera_name, tf["parent"], "_to_", camera_name, tf["child"]],
                 parameters=[
                     {
                         "translation.x": tf["x"],
@@ -75,8 +74,8 @@ def generate_launch_description():
                         "rotation.y": q[1],
                         "rotation.z": q[2],
                         "rotation.w": q[3],
-                        "frame_id": [cam, tf["parent"]],
-                        "child_frame_id": [cam, tf["child"]],
+                        "frame_id": [camera_name, tf["parent"]],
+                        "child_frame_id": [camera_name, tf["child"]],
                     }
                 ],
                 remappings=[("/tf_static", "tf_static")],
@@ -85,13 +84,14 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument("ros_namespace", default_value=""),
-            DeclareLaunchArgument("camera_name", default_value="orbbec_astra2"),
             DeclareLaunchArgument(
-                "static_container_name", default_value="static_tf_publisher_container"
+                "camera_name", default_value="orbbec_astra_stereo_s_u3"
+            ),
+            DeclareLaunchArgument(
+                "container_name", default_value="static_tf_publisher_container"
             ),
             LoadComposableNodes(
-                target_container=[ns, "/", container_name],
+                target_container=[container_name],
                 composable_node_descriptions=composable_nodes,
             ),
         ]
