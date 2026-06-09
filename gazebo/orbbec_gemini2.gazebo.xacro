@@ -13,7 +13,6 @@
           <camera_info_topic>/$(arg robot_name)/${name}/color/camera_info</camera_info_topic>
           <optical_frame_id>${name}_color_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(63.0)}</horizontal_fov>
-          <vertical_fov>${radians(50.0)}</vertical_fov>
           <image>
             <format>R8G8B8</format>
             <width>640</width>
@@ -37,7 +36,6 @@
           <camera_info_topic>/$(arg robot_name)/${name}/depth/camera_info</camera_info_topic>
           <optical_frame_id>${name}_depth_optical_frame</optical_frame_id>
           <horizontal_fov>${radians(63.0)}</horizontal_fov>
-          <vertical_fov>${radians(50.0)}</vertical_fov>
           <image>
             <format>R_FLOAT32</format>
             <width>640</width>
@@ -64,7 +62,6 @@
             <optical_frame_id>${name}_color_optical_frame</optical_frame_id>
             <segmentation_type>instance</segmentation_type>
             <horizontal_fov>${radians(63.0)}</horizontal_fov>
-            <vertical_fov>${radians(50.0)}</vertical_fov>
             <image>
               <width>640</width>
               <height>480</height>
