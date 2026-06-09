@@ -2,11 +2,8 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- When use_rgl is true the Livox Mid360 is simulated with the GPU-accelerated
        RGL plugin (rgl::RGLServerPluginInstance), which requires the
-       rgl::RGLServerPluginManager to be loaded in the world (see base.world.xacro)
-       and a usable NVIDIA GPU at runtime. Otherwise the native gz gpu_lidar sensor
-       is used. The value is selected automatically by the launch files via
-       hector_gazebo_simulation.rgl.resolve_use_rgl; default false so the package
-       still renders standalone without the RGL plugin present. -->
+       rgl::RGLServerPluginManager to be loaded in the world and a usable NVIDIA
+       GPU at runtime. Otherwise the native gz gpu_lidar sensor is used. -->
   <xacro:arg name="use_rgl" default="false"/>
   <xacro:macro name="livox_mid360_gazebo" params="visualize:=false name:=default">
     <gazebo reference="${name}_laser_frame">
