@@ -67,6 +67,8 @@ def generate_launch_description():
                 name=[camera_name, tf["parent"], "_to_", camera_name, tf["child"]],
                 parameters=[
                     {
+                        # Static transforms do not need sim time, would only create overhead from /clock subscription
+                        "use_sim_time": False,
                         "translation.x": tf["x"],
                         "translation.y": tf["y"],
                         "translation.z": tf["z"],
