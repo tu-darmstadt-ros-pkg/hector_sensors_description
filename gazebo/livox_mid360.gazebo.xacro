@@ -5,6 +5,9 @@
        rgl::RGLServerPluginManager to be loaded in the world and a usable NVIDIA
        GPU at runtime. Otherwise the native gz gpu_lidar sensor is used. -->
   <xacro:arg name="use_rgl" default="false"/>
+  <!-- When rgl_publish_color is true the RGL lidar adds an "rgb" field to the point
+       cloud, colored from the materials/textures of the hit visuals -->
+  <xacro:arg name="rgl_publish_color" default="true"/>
   <xacro:macro name="livox_mid360_gazebo" params="visualize:=false name:=default">
     <gazebo reference="${name}_laser_frame">
       <xacro:if value="$(arg use_rgl)">
@@ -21,6 +24,7 @@
             <update_on_paused_sim>false</update_on_paused_sim>
             <topic>/$(arg robot_name)/${name}/points</topic>
             <frame>${name}_laser_frame</frame>
+            <publish_color>$(arg rgl_publish_color)</publish_color>
             <pattern_preset>Livox Mid360</pattern_preset>
           </plugin>
         </sensor>
