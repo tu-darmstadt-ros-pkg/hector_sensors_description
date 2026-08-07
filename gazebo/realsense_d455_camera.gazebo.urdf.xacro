@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default=""/>
+  <xacro:macro name="realsense_d455_camera_gazebo_plugin_macro" params="name parent image_topic depth_topic:=image_raw depth_points_topic frame_name:=color min_range max_range update_rate">
+    <gazebo reference="${name}_link">
+      <sensor type="rgbd_camera" name="${name}">
+        <update_rate>${update_rate}</update_rate>
+        <topic>$(arg robot_name)/${name}</topic>
+        <gz_frame_id>${name}_${frame_name}_optical_frame</gz_frame_id>
+        <camera name="${name}_color">
+          <topic>image_topic</topic>
+          <camera_info_topic>${name}/camera_info</camera_info_topic>
+          <horizontal_fov>${87.0 * M_PI/180.0}</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>${min_range}</near>
+            <far>${max_range}</far>
+          </clip>
+        </camera>
+        <depth_camera>
+          <topic>depth_topic</topic>
+          <!-- Depth camera parameters -->
+          <clip>
+            <near>${min_range}</near>
+            <far>${max_range}</far>
+          </clip>
+        </depth_camera>
+        <point_cloud>
+          <topic>depth_points_topic</topic>
+        </point_cloud>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

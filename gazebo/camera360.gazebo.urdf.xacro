@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="camera360_gazebo" params="name camera_name update_rate fov image_format res_x res_y ros_topic">
+    <gazebo reference="${name}_${camera_name}_link">
+      <sensor type="wideanglecamera" name="${name}_${right_cam_name}_camera_sensor">
+        <update_rate>${update_rate}</update_rate>
+        <gz_frame_id>${name}_${camera_name}_optical_frame</gz_frame_id>
+        <camera>
+          <!--<horizontal_fov>${hfov * M_PI/180.0}</horizontal_fov>-->
+          <horizontal_fov>${fov}</horizontal_fov>
+          <image>
+            <format>${image_format}</format>
+            <width>${res_x}</width>
+            <height>${res_y}</height>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>100</far>
+          </clip>
+          <lens>
+            <type>stereographic</type>
+            <scale_to_hfov>true</scale_to_hfov>
+            <cutoff_angle>1.5707</cutoff_angle>
+            <env_texture_size>512</env_texture_size>
+          </lens>
+        </camera>
+        <topic>${ros_topic}</topic>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>
