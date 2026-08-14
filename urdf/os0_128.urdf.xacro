@@ -28,9 +28,22 @@
         </geometry>
       </collision>
     </link>
+    <!-- Optical frame of the published point cloud (Ouster lidar_frame).
+         Not the robot mount: that yaw lives on ${name}_joint in the robot description.
+
+         Values are the factory lidar_to_sensor intrinsic from OS0 metadata
+         (GET /api/v1/sensor/metadata/lidar_intrinsics), which is the same for
+         OS0 Gen1/Gen2:
+           [[-1, 0, 0, 0],
+            [ 0,-1, 0, 0],
+            [ 0, 0, 1, 36.18],  # mm
+            [ 0, 0, 0, 1]]
+         i.e. 180 deg about Z and +36.18 mm. Lidar +X is encoder 0° / the
+         connector; sensor (housing) +X is opposite the connector.
+         See https://static.ouster.dev/sensor-docs/image_route1/image_route2/sensor_data/sensor-data.html -->
     <link name="${name}_laser_frame"/>
     <joint name="${name}_sensor_joint_laser_frame" type="fixed">
-      <origin xyz="0 0 -0.01" rpy="0 0 ${-pi/2.0}"/>
+      <origin xyz="0 0 0.03618" rpy="0 0 ${pi}"/>
       <parent link="${name}_link"/>
       <child link="${name}_laser_frame"/>
     </joint>
