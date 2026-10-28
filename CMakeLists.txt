@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 project(hector_sensors_description VERSION 0.5.1)
 
 # Find necessary packages
