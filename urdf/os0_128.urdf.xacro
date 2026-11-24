@@ -12,7 +12,7 @@
       <xacro:inertial_sphere mass="0.992" diameter="0.08082"/>
       <visual>
         <geometry>
-          <mesh filename="package://hector_sensors_description/meshes/os0_128/os0_128.glb"/>
+          <mesh filename="package://hector_sensors_description/meshes/os0_128/os0_128.dae"/>
         </geometry>
       </visual>
       <collision>
